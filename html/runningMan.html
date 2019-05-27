@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/resources/ui/css/reset.css">
+    <link rel="stylesheet" href="/resources/ui/css/common.css">
+    <script src="../resources/js/jquery-3.4.1.min.js"></script>
+    <title>달리기</title>
+</head>
+<body>
+    <div class="running-wrap">
+        <span class="img-running" src="../resources/image/img-running.png">달리고 있는 사람</span><br>
+        <button type="button" class="btn-running">달려라</button>
+    </div>
+<script>
+    'use strict';
+
+    var running = (function() {
+        var n = 0,   // n번째
+            cycle = 500,    // 주기 (작을수록 빨라짐)
+            i = 0;
+        function running() {
+            var fnLoop = function(){ 
+                setTimeout(function(){
+                    changeImg()
+                }, cycle*0.2)
+                console.log(cycle*0.2)
+            }
+            var changeImg = function(){
+                n++; // 모션 변경
+                cycle = cycle-n*0.05;
+                $('.img-running').css({
+                    'background-position':-$('.img-running').innerWidth()*n, 
+                    'margin-left': n*1000/cycle
+                });
+                if (n*1000/cycle <= $('.running-wrap').outerWidth()){
+                    fnLoop();
+                }
+            }
+            // var loop = function(){
+            //     // cycle = (cycle >= 200) ? cycle : 200;
+            //     var fnLoop = setTimeout(function(){
+            //         changeImg()
+            //     }, cycle*0.2)
+            // };
+            fnLoop();
+        }
+        return {
+            init: function() {
+                running();
+            }
+        }
+    })();
+
+    running.init();
+</script>
+</body>
+</html>

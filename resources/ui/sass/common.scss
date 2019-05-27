@@ -1,6 +1,15 @@
 $mColor:#ff7800;
+$fullWidth: '100%';
+@mixin sr-only{ // only screenReader
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    color: transparent;
+    font-size: xx-small;
+    text-indent: -9999px;
+}
 #ejGraph{
-    width: 100%;
+    width: $fullWidth;
     height: 400px;
     margin-top: 40px;
     &:after{
@@ -43,5 +52,30 @@ $mColor:#ff7800;
                 text-align: center;
             }
         }
+    }
+}
+.running-wrap{
+    width: $fullWidth;
+    margin:{
+        top: 100px;
+    }
+    background: linear-gradient(180deg, #fff 30%, rgb(228, 252, 184));
+    overflow: hidden;
+    .img-running{
+        @include sr-only;
+        display: inline-block;
+        width: 50px;
+        height: 70px;
+        margin-left: 1px;
+        background:{
+            image: url("/resources/image/img-running.png");
+            size: 1150px 70px;
+            position: 0;
+        }
+    }
+    .btn-running{
+        padding: 5px 10px;
+        background: #000;
+        color: #fff;
     }
 }
