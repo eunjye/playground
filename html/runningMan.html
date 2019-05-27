@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="running-wrap">
-        <span class="img-running" src="../resources/image/img-running.png">달리고 있는 사람</span><br>
+        <span class="img-running">달리고 있는 사람</span><br>
         <button type="button" class="btn-running">달려라</button>
     </div>
 <script>
@@ -17,41 +17,37 @@
 
     var running = (function() {
         var n = 0,   // n번째
-            cycle = 500,    // 주기 (작을수록 빨라짐)
-            i = 0;
+            cycle = 500;    // 주기 (작을수록 빨라짐)
         function running() {
             var fnLoop = function(){ 
                 setTimeout(function(){
                     changeImg()
                 }, cycle*0.2)
-                console.log(cycle*0.2)
             }
-            var changeImg = function(){
-                n++; // 모션 변경
-                cycle = cycle-n*0.05;
+            var changeImg = function(){  // 모션 변경 함수
+                var mgl = n*1000/cycle;
                 $('.img-running').css({
                     'background-position':-$('.img-running').innerWidth()*n, 
-                    'margin-left': n*1000/cycle
+                    'margin-left': mgl
                 });
-                if (n*1000/cycle <= $('.running-wrap').outerWidth()){
+                cycle = cycle-n/20;
+                n++;
+                console.log(mgl);
+                if (mgl <= $('.running-wrap').outerWidth()){
                     fnLoop();
-                }
+                } else console.info('달리기 끝');
             }
-            // var loop = function(){
-            //     // cycle = (cycle >= 200) ? cycle : 200;
-            //     var fnLoop = setTimeout(function(){
-            //         changeImg()
-            //     }, cycle*0.2)
-            // };
             fnLoop();
         }
         return {
             init: function() {
-                running();
+                $('.btn-running').off('click.run').on('click.run', function(){
+                    running();
+                });
             }
         }
     })();
-
+    
     running.init();
 </script>
 </body>
