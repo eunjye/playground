@@ -269,7 +269,7 @@
     )
     */
     
-    // [객체.valueOf]
+    /* // [객체.valueOf]
     var obj = { a: 'hi', b: 'jihye' };
     console.log(
         // 객체의 기본 값 의미.
@@ -281,4 +281,304 @@
         },
         obj + 5,  // 8
     )
+    */
+   
+    /* // [Object.create(prototype, 속성들)]
+    // 객체를 생성하는 방법 중 하나. 여러 속성들이 존재.
+    // 속성들과 맞지 않을 시 strict모드에서는 error가 뜨고, 일반모드에서는 그냥 적용되지 않은 상태로 넘어간다. (ex: writabel: false일 시 값을 재설정하면, strict모드에서는 error 이후 넘어가지 않지만, 일반모드에서는 그냥 값이 바뀌지 않고 이전값으로 적용되어 넘어간다.)
+    var obj = Object.create(Object.prototype);  // var obj = {}; 와 같음.
+    var obj2 = Object.create(null, {
+        a: {
+            writabel: true,
+            configurable: false,
+            value: 5,
+        }
+    });
+    console.log(obj2.a); 
+
+    // [Object.defineProperties(객체, 속성들), Object.defineProperty(객체, 속성, 설명)]
+    // 객체의 속성을 자세하게 정의 가능.
+    Object.defineProperties(obj, {
+        // writabel, enumerable, configuable은 defineProperties로 정의할 시 기본값 false, 
+        // 그냥 객체 = {} 식으로 정의하면 기본값 true
+        a: {
+            value: 10,  // 속성값
+            writable: true,  // 속성값을 변경 가능한가
+            enumerable: true,  // for ... in 반복문에서 사용 가능한가
+        },
+        b: {
+            // value와 writable은 get, set과 함께 선언 불가하네
+            // value: 'hi',
+            // writable: true,
+            get: function() {  // 속성의 값을 가져올 때 (value정의와 함께 정의 불가)
+                return 'jihye';
+            },
+            set: function(value) {  // 속성의 값을 설정할 때 (value정의와 함께 정의 불가)
+                console.log(this, value);
+                this.a = value;
+            },
+            enumerable: false,
+            configurable: true,  // 속성의 설명을 변경 가능한가. false인 경우 delete 동작도 불가.
+        }
+    });
+    console.log(obj.a, obj.b)  // 10 'jihye'
+    // obj.a = 20;  // writable이 false 시 error
+    console.log(obj.a);  // 10
+    for (var key in obj) {
+        console.log(key);  // 'a' ; 'b'의 enumarable이 false이므로
+    }
+    obj.b = 'eun';  // set 내의 함수 실행. ==> {a: 20} 'eun'
+    // 위에서 obj.b의 value는 'jihye'였으나(get()으로 인해),
+    // set과 동시에 obj(this)와 'eun'(여기서 들어왔던 value)이 출력됨 (obj.a의 writable이 false면 error)
+    // obj.b의 writable: true|false가 있으면 오류가 나며 값이 변하지 않음 (왜징)
+    console.log(obj.a, obj.b);  // 'eun jihye' ; 
+    // [defineProperty] : 객체의 한 속성의 설명만 수정
+    Object.defineProperty(obj, 'b', {
+        value: 'bye',
+        configurable: false
+    });
+    console.log(obj.b);  // 재정의돼서 set get 사라짐.
+    // delete(obj.b);  // error; configurable: false로 인하여 삭제 불가
+    Object.defineProperty(obj, 'c', {
+        value: { x: 3, y: 4 },
+        writable: false,
+        enumerable: true,
+    });
+    console.log(obj.c);
+    // obj.c = 'silver';  // writable: false 때문에 error
+    obj.c.x = 5;
+    console.log(obj.c);  // {x: 5, y: 4} ; writable은 속성의 값이 객체인 경우, 그 객체 내 속성을 바꾸는 것은 막지 못함.
+    // 전체적으로 막기 위해 Object.freeze 메소드가 있다.
+
+    // [Object.freeze()] : 속성 내부의 모든 객체의 속성 값이 변하는 것을 막음.
+    Object.freeze(obj.c);
+    obj.c.x = 20;  // error
+    // [Object.seal()] : 속성의 추가/제거 막고, configurable을 false로 바꿈.
+    // 대신 속성의 값은 writable: true이기만 하면 변경 가능.
+    // [Object.preventExtensions] : 속성의 추가만 막음. 그 외에 속성 제거, 값 변경, 설정 변경은 가능.
+    // ** 위의 세 상태를 알기 위해 Object.isFrozen, Object.isSealed, Object.isExtensible을 사용한다.
+    */
+
+    /* // [Object.keys(객체)] : 객체의 속성명을 모두 가져와 배열 생성. enumerable: false인 것은 예외.
+    var obj3 = {a: 'aa', b: 'bb', c: 'cc', d: 'dd'};
+    Object.defineProperty(obj3, 'c', {
+        enumerable: false
+    });
+    console.log(Object.keys(obj3));  // ['a', 'b', 'd']
+    */
+
+    /* // [typeof] : 식의 타입 반환. 객체 뿐만 아니라 배열, null도 object로 표시되므로,
+    // 배열 구분을 위해 Array.isArray 메소드 사용,
+    // null을 구분하려면 따로 처리해야 함. (null이 object로 표시되는 건 js의 실수로 여겨짐.)
+    var a = 1,
+        b = 'jihye',
+        c = true,
+        d = {a: 'hi', b: 'jihye'},
+        e = [],
+        f = function() {},
+        g,
+        h = null;
+    console.log(
+        typeof(a),  // number
+        typeof(b),  // string
+        typeof(c),  // boolean
+        typeof(d),  // object
+        typeof(e),  // object
+        Array.isArray(e),  // true
+        typeof(f),  // function
+        typeof(g),  // undefined
+        typeof(h)  // object
+    )
+    console.log(d);  // {a: "hi", b: "jihye"}
+    // delete(d);  // strict 모드에서는 error
+    delete(d.a);
+    console.log(d);  // {b: "jihye"}
+    */
+
+    /* // [네임스페이스 방식] : 변수 중복 방지를 위한 선언 방식
+    // [기본 방식] : obj라는 변수를 통해 고유 변수명을 짓는 것이기 때문에 중복될 염려가 없다.
+    var obj = {
+        x: 'local',
+        y: function() {
+            console.log(this.x);
+        }
+    };
+    obj.y();  // 'local'
+
+    // [기본 방식의 단점] : 코드 밑에 단순히 스크립트를 조금만 추가해도 달라질 수 있다.
+    obj.x = 'hacked';
+    obj.y();  // hacked'
+
+    // [네임스페이스 기본 방식의 단점을 보완하기 위한 방법 : 비공개 변수]
+    // (function() {})(); : IIFE(즉시 호출 함수 표현식) / 모듈 패턴
+    var newScope = (function() {
+        var x = '로컬에서만 조작할 수 있어요!'
+        return {  // 외부에서 y만 접근 가능. (another = {y: y})
+            y: function() {
+                console.log(x);
+            }
+        }
+    })();
+    newScope.y();
+    console.log(newScope.x);  // 외부에서는 x를 부를 수 없다.
+    newScope.x = '외부에서는 y()가 부르는 x를 조작할 수 없습니다.';  // return되지 않으므로 외부에서 조작 불가
+    newScope.y();
+    console.log(newScope.x);  // 네임스페이스 내의 y함수가 호출하는 x값은 네임스페이스 내 선언됐던 x 값이 호출된다.
+    */
+
+    /* // ★★[호이스팅] : 변수를 선언하고 초기화했을 때 선언 부분이 최상단으로 끌어올려지는 현상.
+    // 함수 표현식이 아니라 함수 선언식일 때는, 함수 호출이 선언보다 먼저 있어도 선언식 자체가 통째로 끌어올려지며 에러 발생 X
+    console.log(obj2);  // error가 아니라 undefined. 선언이 맨 처음에 되고 대입은 후에 되니까. 만약 밑에서 obj2를 정의하지 않았으면 error.
+    obj1();
+    function obj1() {
+    // var obj1 = function() {...}하면 위로 끌어올려지지 않음. 선언은 맨 처음에 되지만 대입은 이 차례에서 되기 때문.
+        console.log('실행된다.');
+    };
+    var obj2 = '실행되지 않는다.'
+    // ==> ★ 대입은 순서대로, 선언은 맨 위에서. 함수 선언식은 선언과 동시에 대입!
+    */
+
+    /* // ★★[클로저(closure)] : 비공개 변수를 가질 수 있는 환경에 있는 함수
+    // 비공개 변수 : 클로저 함수 내부에서 생성한 변수도, 매개변수도 아닌 변수.
+    // 컨텍스트 : 문맥, 코드의 실행 환경.
+    // 전역 컨텍스트, 함수 컨텍스트 생성 후 생명주기동안 유지됨.
+    // 함수 컨텍스트는 함수 호출 시마다 생성됨.
+    // 컨텍스트 생성 시 컨텍스트 안에 변수객체(arguments, variable), scope chain, this가 생성됨.
+    // 컨텍스트 생성 후 함수가 실행되는데, 변수들은 변수 객체 안에서 값을 찾고, 없다면 스코프 체인을 따라 올라가며 찾음.
+    // 함수 실행이 마무리되면 해당 컨텍스트는 사라짐. (클로저 제외)
+    // 페이지 종료 시 전역 컨텍스트 사라짐.
+
+    // 비공개 변수를 포함하고 있는 함수 : 비공개 변수나, 비공개 변수가 있는 스코프에 대한 클로저.
+    // 비공개 변수 : 스코프 내부에서 생성되지도 않았고, 해당 스코프의 매개변수도 아닌 변수.
+
+    // 고정된 j에 대한 클로저인 function 만듦.
+    // 만약 여기서 고정된 j에 대한 클로저인 function을 만들지 않으면, 함수는 선언할 때 스코프가 생성되는 특성을 가지므로, 이벤트리스너 안의 i는 외부의 i를 계속 참조한다. 따라서 i는 반복문 종료 후 최종적으로 5가 되므로 모두 alert(5)를 하게 된다. (이해 모호)
+    // 클로저를 이용하지 않으면
+    for (var i=0; i<5; i++){
+        $('#target' + i).on('click', function() {
+            alert(i);  // 5
+        })
+    }
+    // 클로저를 이용
+    for (var i=0; i<5; i++){
+        (function(j) {
+            $('#target' + j).on('click', function() {
+                alert(j);  // j
+            })
+        })(i);
+    }
+    */
+
+    /* // [JSON]
+    var example = {
+        'stringifyMe': 'please',
+        'andParseMe': 'thankYou'
+    };
+    var string = JSON.stringify(example);  // JSON을 문자열로 만들기
+    var parsed = JSON.parse(string);  // 원상태로
+    
+    var obj = {test: 'yes'};
+    var obj2 = JSON.parse(JSON.stringify(obj));  // {test: 'yes'} ; 참조X 복사O
+    obj2.text = 'no';
+    console.log(obj.test, obj2.test);  // 'yes yes'
+    */
+
+    /* // [CallBack]
+    // setTimeout을 사용함으로써, 해당 계산이 끝날 때까지 기다린 이후 다음 동작들이 실행되는게 아니고, 일단 다음 동작들이 실행되다가 계산이 끝나면 '비동기적'으로 결과를 출력함.
+    var cbExample = function(number, cb){
+        setTimeout(function(){  // setTimeout을 사용함으로써 비동기적으로 실행됨. 0초만에 실행하도록 했지만 비동기적으로 실행됨. 이 부분을 빠트리면 55가 first보다 먼저 표시됨. CallBack의 의미가 없어짐.
+            var sum = 0;
+            for (var i=number; i>0; i--){
+                sum += i;
+            }
+            cb(sum);
+        }, 0);
+    };
+    cbExample(10, function(result){
+        console.log(result);  // 55
+    });
+    console.log('first');
+    */
+
+    /* // [이벤트 객체]
+    // getElementsByClassName()으로 가져온 값은 배열이 아니라 HTMLCollection.
+    var btns = document.getElementsByClassName('aaa');
+    Array.prototype.forEach.call(btns, function(btn){  // 배열의 프로토타입에 있는 forEach 메소드를 가져와서 btns에 적용.
+        console.log(btn);
+        btns[0]
+        .addEventListener('click', function(event){
+            event.stopImmediatePropagation();
+            console.log(event);
+            event.preventDefault();  // 태그의 기본 동작을 막음
+            // event.stopPropagation();  // 태그 이벤트 시 부모에게 이벤트가 전달(버블링)되지 않도록 막음.
+            // event.stopImmediatePropagation();  // 버블링을 막음과 동시에, 같은 이벤트의 다른 리스너도 실행되지 않도록 막음.
+        });
+    });
+    */
+
+    /* // prototype 상속하는 응용 방법
+    var Person = (function(){
+        function makePerson(name, age){
+            this.name = name;
+            this.age = age;
+        };
+        $.extend(makePerson.prototype, {
+            sayHello: function(){
+                console.log(this.name, this.age);
+            }
+        });
+        return makePerson;
+    })();
+
+    var Child = (function(){
+        function makeChild(name, age, school){
+            // apply: Person과 중복되는 인자 공유하기. 매개변수로는 this와 인자들을 하나로 묶어 배열로 만들어 넣음.
+            // arguments: 인자들의 묶음. 엄연히 말하자면 유사배열.
+            Person.apply(this, arguments);
+            this.school = school;
+        };
+        // Child와 Person의 prototype 연결
+        makeChild.prototype = Object.create(Person.prototype);
+        makeChild.prototype.constructor = makeChild;
+        // Person과 공유되지 않는 Child만의 메소드 생성
+        $.extend(makeChild.prototype, {
+            introduceSchool: function(){
+                console.log(this.school);
+            }
+        })
+        return makeChild;
+    })();
+
+    var jihye = new Person('jihye', 131);
+    var child = new Child('jidol', 10, 'Bucheon Elementary School');
+    jihye.sayHello();  // 'jihye' 131
+    child.introduceSchool();  // 'Bucheon Elementary School'
+    child.sayHello();  // 'jidol' 10
+    */
+
+    // [call] : this, 인자를 바꿔넣어서 다른 함수를 사용 가능.
+    var obj = {
+        name: 'jihye',
+        say: function(){
+            console.log(this.name);
+        }
+    };
+    var obj2 = {
+        name: 'jidol'
+    };
+    obj.say();  // 'jihye'
+    obj.say.call(obj2);  // 'jidol'
+    function Func1() {
+        this.aa = '안녕하세요';
+        this.bb = '안바뀜';
+        return (this.aa, this.bb);
+    }
+    function Func2() {
+        Func1.call(this);
+        this.bb = '바뀜';
+    }
+    console.log(new Func1());  // Func1 {aa: "안녕하세요", bb: "안바뀜"}
+    console.log(new Func2());  // Func2 {aa: "안녕하세요", bb: "바뀜"}
+
+    // 참고 강의 : ZeroCho 블로그 [https://www.zerocho.com/]
 })();
