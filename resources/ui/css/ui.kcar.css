@@ -43,13 +43,22 @@ body, button, a { font-family: "Noto Sans KR"; }
 .main-nav-wrap .main-nav:after { display: block; clear: both; content: ""; }
 .main-nav-wrap .main-nav .menu-main { float: left; position: relative; }
 .main-nav-wrap .main-nav .menu-main:after { display: block; clear: both; content: ""; }
-.main-nav-wrap .main-nav .menu-main li { float: left; margin-left: 10px; }
-.main-nav-wrap .main-nav .menu-main li.mgl-n, .main-nav-wrap .main-nav .menu-main li:first-child { margin-left: 0; }
-.main-nav-wrap .main-nav .menu-main li.active .btn-main-menu { color: #FF0040; font-weight: 600; border-width: 2px; border-color: transparent; border-style: solid; border-bottom-color: #FF0040; }
-.main-nav-wrap .main-nav .menu-main li.active .menu-detail { display: block; }
-.main-nav-wrap .main-nav .menu-main .menu-detail { position: absolute; display: none; color: #666; font-size: 14px; font-weight: 600; }
-.main-nav-wrap .main-nav .menu-main .btn-main-menu { font-size: 16px; font-weight: 500; height: 60px; padding: 10px 20px; color: #666; background: transparent; }
+.main-nav-wrap .main-nav .menu-main > li { position: relative; float: left; height: 59px; margin-left: 10px; }
+.main-nav-wrap .main-nav .menu-main > li.mgl-n, .main-nav-wrap .main-nav .menu-main > li:first-child { margin-left: 0; }
+.main-nav-wrap .main-nav .menu-main > li.active { height: 109px; }
+.main-nav-wrap .main-nav .menu-main > li.active .btn-main-menu { color: #FF0040; font-weight: 600; padding-left: 18px; padding-right: 18px; border-width: 2px; border-color: transparent; border-style: solid; border-bottom-color: #FF0040; }
+.main-nav-wrap .main-nav .menu-main > li.active .menu-detail { display: block; width: 760px; left: 50%; margin-left: -380px; }
+.main-nav-wrap .main-nav .menu-main .menu-detail { position: absolute; display: none; text-align: center; }
+.main-nav-wrap .main-nav .menu-main .menu-detail > li { display: inline-block; margin-left: 5px; }
+.main-nav-wrap .main-nav .menu-main .menu-detail > li .btn-detail-menu { display: inline-block; height: 50px; padding: 15px 8px; text-decoration: none; border-bottom: 1px solid transparent; font-size: 13px; font-weight: 600; color: #666; }
+.main-nav-wrap .main-nav .menu-main .menu-detail > li.active .btn-detail-menu { color: #181818; border-bottom-color: #181818; }
+.main-nav-wrap .main-nav .menu-main .btn-main-menu { font-size: 16px; font-weight: 500; position: relative; height: 60px; padding: 10px 20px; color: #666; background: transparent; }
 .main-nav-wrap .main-nav .menu-main .btn-main-menu.view-all { display: block; text-indent: -9999px; color: transparent; font-size: xx-small; overflow: hidden; width: 60px; height: 59px; border: 1px solid #efefef; border-width: 0 1px; }
 .main-nav-wrap .main-nav .menu-main .btn-main-menu.live-view { display: block; text-indent: -9999px; color: transparent; font-size: xx-small; overflow: hidden; width: 160px; background: url("/resources/image/logo-3d-live.png") no-repeat center; }
-.main-nav-wrap .main-nav .txt-tel { float: right; font-size: 15px; font-weight: 600; }
-.main-nav-wrap .main-nav .txt-tel strong { color: #FF0040; font-size: 20px; vertical-align: middle; }
+.main-nav-wrap .main-nav .txt-tel { float: right; margin-top: 18px; font-size: 15px; font-weight: 600; }
+.main-nav-wrap .main-nav .txt-tel strong { display: inline-block; margin-top: -4px; color: #FF0040; font-size: 20px; vertical-align: middle; }
+
+.section-visual { width: 100%; }
+.section-visual .visual-txt-wrap { width: 1200px; margin: 0 auto; }
+.section-visual .visual-txt { text-align: center; }
+.section-visual .visual-txt h2 { font-size: 16px; }

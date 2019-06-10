@@ -114,6 +114,7 @@ body, button, a{
 }
 .main-nav-wrap{
     $height-nav: 60px;
+    $height-nav-inner: 50px;
 
     position: relative;
     width: 100%;
@@ -146,8 +147,10 @@ body, button, a{
                 @include clear;
             }
 
-            li{
+            & > li{
+                position: relative;
                 float: left;
+                height: $height-nav - 1;
                 margin-left: 10px;
 
                 &.mgl-n, &:first-child{
@@ -155,9 +158,15 @@ body, button, a{
                 }
                 // 활성화된 버튼 메뉴
                 &.active{
+                    height: $height-nav + $height-nav-inner - 1;
+
                     .btn-main-menu{
                         color: $G-color-main;
                         font-weight: $G-font-weight-bold;
+                        padding: {
+                            left: 18px;
+                            right: 18px;
+                        }
                         border: {
                             width: 2px;
                             color: transparent;
@@ -167,7 +176,12 @@ body, button, a{
                     }
 
                     .menu-detail{
+                        $width-menu: 760px;
+
                         display: block;
+                        width: $width-menu;
+                        left: 50%;
+                        margin-left: -$width-menu / 2;
                     }
                 }
             }
@@ -175,10 +189,31 @@ body, button, a{
             .menu-detail{
                 position: absolute;
                 display: none;
-                color: $G-font-color-light;
-                font: {
-                    size: $G-font-size-normal;
-                    weight: $G-font-weight-bold;
+                text-align: center;
+
+                & > li{
+                    display: inline-block;
+                    margin-left: 5px;
+
+                    .btn-detail-menu{
+                        display: inline-block;
+                        height: $height-nav-inner;
+                        padding: 15px 8px;
+                        text-decoration: none;
+                        border-bottom: 1px solid transparent;
+                        font: {
+                            size: 13px;
+                            weight: $G-font-weight-bold;
+                        }
+                        color: $G-font-color-light;
+                    }
+
+                    &.active{
+                        .btn-detail-menu{
+                            color: #181818;
+                            border-bottom-color: #181818;
+                        }
+                    }
                 }
             }
                 
@@ -187,6 +222,7 @@ body, button, a{
                     size: $G-font-size-large;
                     weight: $G-font-weight-medium;
                 }
+                position: relative;
                 height: $height-nav;
                 padding: 10px 20px;
                 color: $G-font-color-light;
@@ -212,15 +248,34 @@ body, button, a{
 
         .txt-tel{
             float: right;
+            margin-top: 18px;
             font: {
                 size: 15px;
                 weight: $G-font-weight-bold;
             }
             strong{
+                display: inline-block;
+                margin-top: -4px;
                 color: $G-color-main;
                 font-size: 20px;
                 vertical-align: middle;
             }
+        }
+    }
+}
+.section-visual{
+    width: 100%;
+
+    .visual-txt-wrap{
+        width: $G-max-width;
+        margin: 0 auto;
+    }
+    
+    .visual-txt{
+        text-align: center;
+        
+        h2{
+            font-size: $G-font-size-large;
         }
     }
 }
