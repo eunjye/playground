@@ -1,0 +1,15 @@
+@charset "UTF-8";
+/* _mixins.scss */
+
+@mixin clear{
+    display: block;
+    clear: both;
+    content: "";
+}
+@mixin sr-only($display){
+    display: $display;
+    text-indent: -9999px;
+    color: transparent;
+    font-size: xx-small;
+    overflow: hidden;
+}

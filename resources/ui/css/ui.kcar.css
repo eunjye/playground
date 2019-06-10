@@ -1,0 +1,55 @@
+/* _reset.scss */
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Sans+KR&display=swap");
+html, head, body, h1, h2, h3, h4, h5, h6, div, header, hgroup, menu, section, article, summary, footer, main, nav, aside, canvas, details, figcaption, figure, video, img, a, i, b, em, strong, ul, ol, li, p, a, button, table { box-sizing: border-box; padding: 0; margin: 0; border: none; }
+
+article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary { display: block; }
+
+button { border: none; background: #fff; cursor: pointer; }
+
+a { color: inherit; text-decoration: none; cursor: pointer; }
+a:focus, a:hover { text-decoration: underline; }
+
+ul { list-style: none; }
+
+table { border-collapse: collapse; }
+
+/* _variables.scss */
+/* _mixins.scss */
+body, button, a { font-family: "Noto Sans KR"; }
+
+.btn-icon-wrap li { display: inline-block; margin-left: 30px; vertical-align: middle; }
+
+.btn-icon { font-size: 12px; position: relative; padding-left: 30px; color: #666; vertical-align: middle; }
+.btn-icon:before { position: absolute; top: 0; left: 0; display: block; width: 20px; height: 100%; background: #efefef; content: ""; }
+
+.link-quick { position: absolute; top: -9999px; display: block; width: 100%; background: #FF0040; color: #fff; text-align: center; }
+.link-quick:focus { top: 0; }
+
+.header-main { border-bottom: 1px solid #E6E6E6; }
+.header-main .menu-util-wrap { background: #F2F2F2; }
+.header-main .menu-util-wrap .menu-util { width: 1200px; margin: 0 auto; text-align: right; }
+.header-main .menu-util-wrap .btn-util { font-size: 12px; font-weight: 500; color: #666; margin-left: 10px; vertical-align: middle; }
+.header-main .menu-util-wrap .btn-util:first-child { margin-left: 0; }
+.header-main .menu-util-wrap .btn-util.type2 { display: inline-block; padding: 10px 15px; background: #2D2D38; color: #fff; font-weight: 600; }
+.header-main .title-wrap { width: 1200px; margin: 0 auto; text-align: center; }
+.header-main .title-wrap:after { display: block; clear: both; content: ""; }
+.header-main .title-wrap .slide-banner { float: left; width: 280px; height: 85px; background: #eee; }
+.header-main .title-wrap .logo-main { display: inline-block; margin-top: 15px; }
+.header-main .title-wrap .btn-icon-wrap { float: right; width: 280px; margin-top: 35px; text-align: right; }
+
+.main-nav-wrap { position: relative; width: 100%; border-bottom: 1px solid #E6E6E6; }
+.main-nav-wrap:before { position: absolute; top: 59px; display: block; width: 100%; height: 1px; background: #888; content: ""; }
+.main-nav-wrap .main-nav { width: 1200px; margin: 0 auto; }
+.main-nav-wrap .main-nav:after { display: block; clear: both; content: ""; }
+.main-nav-wrap .main-nav .menu-main { float: left; position: relative; }
+.main-nav-wrap .main-nav .menu-main:after { display: block; clear: both; content: ""; }
+.main-nav-wrap .main-nav .menu-main li { float: left; margin-left: 10px; }
+.main-nav-wrap .main-nav .menu-main li.mgl-n, .main-nav-wrap .main-nav .menu-main li:first-child { margin-left: 0; }
+.main-nav-wrap .main-nav .menu-main li.active .btn-main-menu { color: #FF0040; font-weight: 600; border-width: 2px; border-color: transparent; border-style: solid; border-bottom-color: #FF0040; }
+.main-nav-wrap .main-nav .menu-main li.active .menu-detail { display: block; }
+.main-nav-wrap .main-nav .menu-main .menu-detail { position: absolute; display: none; color: #666; font-size: 14px; font-weight: 600; }
+.main-nav-wrap .main-nav .menu-main .btn-main-menu { font-size: 16px; font-weight: 500; height: 60px; padding: 10px 20px; color: #666; background: transparent; }
+.main-nav-wrap .main-nav .menu-main .btn-main-menu.view-all { display: block; text-indent: -9999px; color: transparent; font-size: xx-small; overflow: hidden; width: 60px; height: 59px; border: 1px solid #efefef; border-width: 0 1px; }
+.main-nav-wrap .main-nav .menu-main .btn-main-menu.live-view { display: block; text-indent: -9999px; color: transparent; font-size: xx-small; overflow: hidden; width: 160px; background: url("/resources/image/logo-3d-live.png") no-repeat center; }
+.main-nav-wrap .main-nav .txt-tel { float: right; font-size: 15px; font-weight: 600; }
+.main-nav-wrap .main-nav .txt-tel strong { color: #FF0040; font-size: 20px; vertical-align: middle; }
