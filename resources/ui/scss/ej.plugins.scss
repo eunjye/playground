@@ -2,7 +2,7 @@
 @import './common/reset';  // 스타일 초기화
 @import './common/variables';  // 전역변수
 @import './common/mixins';  // 믹스인
-body, button, a{
+body, button, a, p, pre{
     font-family: $G-font-family-ko;
 }
 html{
@@ -236,5 +236,67 @@ h1.tit-section{
 .sort-item{
     &.moving{
         transition: none;
+    }
+}
+
+/* slide */
+.ej-slide-wrap{
+    width: 100%;
+    height: auto;
+    text-align: center;
+
+    .ej-slide{
+        display: block;
+        width: auto;
+        height: auto; 
+        margin: 0 auto;
+        overflow: hidden;
+        
+        &> ul{
+            position: relative;
+
+            &:after{
+                @include clear;
+            }
+        }
+
+        .ej-slide-page{
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+
+            &.active{
+                display: block;
+            }
+        }
+    }
+
+    .slide-nav{
+        display: inline-block;
+        margin: 0 auto; 
+
+        .btn-paging{
+            @include sr-only(inline-block);
+
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background: blue;
+            border-radius: 50%;
+
+            &.active{
+                background: red;
+            }
+        }
+    }
+    
+    .slide-btn-wrap{
+        .btn-slide{
+            padding: 5px 10px;
+            background: #222;
+            color: #fff;
+            border-radius: 4px;
+        }
     }
 }

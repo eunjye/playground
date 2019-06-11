@@ -15,7 +15,7 @@ table { border-collapse: collapse; }
 
 /* _variables.scss */
 /* _mixins.scss */
-body, button, a { font-family: "Noto Sans KR"; }
+body, button, a, p, pre { font-family: "Noto Sans KR"; }
 
 html { overflow-x: hidden; }
 
@@ -65,3 +65,15 @@ h1.tit-section { margin: 0 20px 10px; }
 .ej-sortable-placeholder + .sort-item { border-top: 1px solid #ddd; }
 
 .sort-item.moving { transition: none; }
+
+/* slide */
+.ej-slide-wrap { width: 100%; height: auto; text-align: center; }
+.ej-slide-wrap .ej-slide { display: block; width: auto; height: auto; margin: 0 auto; overflow: hidden; }
+.ej-slide-wrap .ej-slide > ul { position: relative; }
+.ej-slide-wrap .ej-slide > ul:after { display: block; clear: both; content: ""; }
+.ej-slide-wrap .ej-slide .ej-slide-page { position: absolute; top: 0; left: 0; display: none; }
+.ej-slide-wrap .ej-slide .ej-slide-page.active { display: block; }
+.ej-slide-wrap .slide-nav { display: inline-block; margin: 0 auto; }
+.ej-slide-wrap .slide-nav .btn-paging { display: inline-block; text-indent: -9999px; color: transparent; font-size: xx-small; overflow: hidden; width: 10px; height: 10px; margin: 0 5px; background: blue; border-radius: 50%; }
+.ej-slide-wrap .slide-nav .btn-paging.active { background: red; }
+.ej-slide-wrap .slide-btn-wrap .btn-slide { padding: 5px 10px; background: #222; color: #fff; border-radius: 4px; }

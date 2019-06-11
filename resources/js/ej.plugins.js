@@ -5,8 +5,9 @@
         $.plugins = { _unique: 0 };
     }
 
+    // 아코디언, 아이템 정렬
     $.extend(true, $.plugins, {
-
+        /* 아코디언 */
         accordion: function(opt){
             var id = opt.id,
                 speed = (opt.speed === undefined) ? 1000 : opt.speed,
@@ -60,6 +61,7 @@
             })
         },
 
+        /* 아이템 정렬 */
         sortlist: function(opt){
             var list = {
                 list: 0,
@@ -166,11 +168,132 @@
                 }
             }
             list.init(opt);
-        }
+        },
+
+        /* 슬라이드 */
+        slide: (() => {
+
+            function createSlide(opt){
+                var id = (opt.id === undefined) ? (function(){console.error('옵션이 없어요')})() : opt.id,
+                    $wrap = $('#' + id),
+                    $slide = $wrap.find('.ej-slide'),
+                    $page = $slide.find('.ej-slide-page'),
+                    $currPage = $page.filter('.active'),
+                    $nextPage = null,
+                    $prevPage = null,
+                    $btnToggle = $wrap.find('.btn-slide.toggle'),
+                    currIndex = $currPage.index(),
+
+                    speed = (opt.speed === undefined) ? 3000 : opt.speed,
+                    
+                    play = 1,  // 재생 상태
+                    curr = 0;  // 현재 페이지 인덱스
+                    
+                draw();
+                resizeBox(0);  // 초기화
+                setPage();
+
+                var flowSlide = setInterval(function(){
+                    nextSlide();
+                }, speed);
+
+                $btnToggle
+                    .off('click.toggleSlide')
+                    .on('click.toggleSlide', function(){
+                        if (play === 1){
+                            clearInterval(flowSlide);
+                            $btnToggle.text('슬라이드 재생');
+                            play = 0;
+                        } else if (play === 0){
+                            flowSlide = setInterval(function(){
+                                nextSlide();
+                            }, speed);
+                            $btnToggle.text('슬라이드 정지');
+                            play = 1;
+                        }
+                });
+                nextSlide();
+
+                function draw(){  // 컴포넌트 자동 생성
+
+                };
+
+                function setPage() {  // 페이지 갱신
+                    $currPage = $page.eq(currIndex);
+                    if (currIndex < $page.length-1 && 0 < currIndex){
+                        $nextPage = $page.eq(currIndex+1);
+                        $prevPage = $page.eq(currIndex-1);
+                    } else if (currIndex === 0){
+                        $nextPage = $page.eq(currIndex+1);
+                        $prevPage = $page.eq($page.length-1);
+                    } else if (currIndex === $page.length-1){
+                        $nextPage = $page.eq(0);
+                        $prevPage = $page.eq(currIndex-1);
+                    }
+                }
+                function resizeBox(flag){  // 슬라이드 영역 크기 재조정
+                    var currW = $currPage.outerWidth(),
+                        currH = $currPage.outerHeight();
+                    if (flag === 0){
+                        $slide.outerWidth(currW).outerHeight(currH);
+                    } else {
+                        $slide.animate({
+                            width: currW,
+                            height: currH
+                        }, parseInt(speed/3));
+                    }
+                };
+                function nextSlide(){  // 다음 슬라이드로 넘김
+                    var boxWidth = $currPage.outerWidth();
+                    $nextPage.show().css('left', boxWidth);
+                    $slide.find('ul').animate({
+                        left: -boxWidth
+                    }, parseInt(speed/3), function(){
+                        $prevPage.removeClass('active').hide();
+                        $currPage.addClass('active').css('left', 0);;
+                        $slide.find('ul').css('left', 0);
+                    });
+                    if (currIndex === $page.length-1){
+                        currIndex = 0;
+                    } else {
+                        currIndex++;
+                    }
+                    setPage();
+                    resizeBox();
+
+                    function newFunction() {
+                        $nextPage.css('float', 'right');
+                    }
+                };
+                function prevSlide(){  // 이전 슬라이드로 넘김
+    
+                    resizeBox();
+                };
+                // function flowSlide(){  // 슬라이드 자동 재생
+    
+                // };
+                function stopSlide(){  // 슬라이드 멈춤
+    
+                };
+                function jumpSlide(){  // 페이징 컴포넌트 클릭 시 슬라이드 넘김
+    
+                };
+
+            }
+            return (opt) => {createSlide(opt)}
+        })()
     })
 
+
+
+    /* 작동시키기 */
     $.plugins.accordion({
         id: 'accordion1',
+        speed: 200,
+        allClose: true // 활성화 시 다른 탭 닫음
+    });
+    $.plugins.accordion({
+        id: 'accordion3',
         speed: 200,
         allClose: true // 활성화 시 다른 탭 닫음
     });
@@ -183,5 +306,10 @@
 
     $.plugins.sortlist({
         id: 'sortingList1'
+    });
+
+    $.plugins.slide({
+        id: 'slide1',
+        speed: 3000
     });
 })();
