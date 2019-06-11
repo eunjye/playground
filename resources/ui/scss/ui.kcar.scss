@@ -275,7 +275,13 @@ body, button, a{
         text-align: center;
         
         h2{
-            font-size: $G-font-size-large;
+            font-size: 34px;
+            strong{
+                color: $G-color-main;
+            }
+        }
+        p{
+            font-size: 20px;
         }
     }
 }

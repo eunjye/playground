@@ -61,4 +61,6 @@ body, button, a { font-family: "Noto Sans KR"; }
 .section-visual { width: 100%; }
 .section-visual .visual-txt-wrap { width: 1200px; margin: 0 auto; }
 .section-visual .visual-txt { text-align: center; }
-.section-visual .visual-txt h2 { font-size: 16px; }
+.section-visual .visual-txt h2 { font-size: 34px; }
+.section-visual .visual-txt h2 strong { color: #FF0040; }
+.section-visual .visual-txt p { font-size: 20px; }
