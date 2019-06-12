@@ -174,17 +174,21 @@
         slide: (() => {
 
             function createSlide(opt){
-                var id = (opt.id === undefined) ? (function(){console.error('옵션이 없어요')})() : opt.id,
+                var id = (opt.id === undefined) ? console.error('id값이 없어요') : opt.id,
                     $wrap = $('#' + id),
                     $slide = $wrap.find('.ej-slide'),
                     $page = $slide.find('.ej-slide-page'),
                     $currPage = $page.filter('.active'),
                     $nextPage = null,
                     $prevPage = null,
-                    $btnToggle = $wrap.find('.btn-slide.toggle'),
+                    $btn = $wrap.find('.btn-slide'),
+                    $btnToggle = $btn.filter('.toggle'),
+                    $btnNext = $btn.filter('.next'),
+                    $btnPrev = $btn.filter('.prev'),
                     currIndex = $currPage.index(),
 
                     speed = (opt.speed === undefined) ? 3000 : opt.speed,
+                    aniSpeed = parseInt(speed/3),
                     
                     play = 1,  // 재생 상태
                     curr = 0;  // 현재 페이지 인덱스
@@ -200,19 +204,45 @@
                 $btnToggle
                     .off('click.toggleSlide')
                     .on('click.toggleSlide', function(){
-                        if (play === 1){
-                            clearInterval(flowSlide);
-                            $btnToggle.text('슬라이드 재생');
-                            play = 0;
-                        } else if (play === 0){
-                            flowSlide = setInterval(function(){
-                                nextSlide();
-                            }, speed);
-                            $btnToggle.text('슬라이드 정지');
-                            play = 1;
+                        switch (play){
+                            case 1: {  // 재생 중
+                                clearInterval(flowSlide);
+                                $btnToggle.text('슬라이드 재생');
+                                play = 0;
+                                break;
+                            };
+                            case 0: {  // 정지 상태
+                                flowSlide = setInterval(function(){
+                                    nextSlide();
+                                }, speed);
+                                $btnToggle.text('슬라이드 정지');
+                                play = 1;
+                                break;
+                            }
                         }
                 });
-                nextSlide();
+
+                $btnPrev
+                    .off('click.toPrevSlide')
+                    .on('click.toPrevSlide', function(){
+                        prevSlide();
+                });
+
+                $btnNext
+                    .off('click.toNextSlide')
+                    .on('click.toNextSlide', function(){
+                        nextSlide();
+                        clearInterval(flowSlide);
+                        switch (play){
+                            case 1: {
+                                flowSlide = setInterval(function(){
+                                    nextSlide();
+                                }, speed);
+                                break;
+                            }
+                        }
+                });
+                
 
                 function draw(){  // 컴포넌트 자동 생성
 
@@ -237,20 +267,20 @@
                     if (flag === 0){
                         $slide.outerWidth(currW).outerHeight(currH);
                     } else {
-                        $slide.animate({
+                        $slide.stop().animate({
                             width: currW,
                             height: currH
-                        }, parseInt(speed/3));
+                        }, aniSpeed);
                     }
                 };
                 function nextSlide(){  // 다음 슬라이드로 넘김
                     var boxWidth = $currPage.outerWidth();
                     $nextPage.show().css('left', boxWidth);
-                    $slide.find('ul').animate({
+                    $slide.find('ul').stop().animate({
                         left: -boxWidth
-                    }, parseInt(speed/3), function(){
-                        $prevPage.removeClass('active').hide();
-                        $currPage.addClass('active').css('left', 0);;
+                    }, aniSpeed, function(){
+                        $prevPage.removeClass('active');
+                        $currPage.show().addClass('active').css('left', 0);
                         $slide.find('ul').css('left', 0);
                     });
                     if (currIndex === $page.length-1){
@@ -286,30 +316,4 @@
 
 
 
-    /* 작동시키기 */
-    $.plugins.accordion({
-        id: 'accordion1',
-        speed: 200,
-        allClose: true // 활성화 시 다른 탭 닫음
-    });
-    $.plugins.accordion({
-        id: 'accordion3',
-        speed: 200,
-        allClose: true // 활성화 시 다른 탭 닫음
-    });
-
-    $.plugins.accordion({
-        id: 'accordion2',
-        speed: 200,
-        allClose: false // 활성화 시 다른 탭 닫음
-    });
-
-    $.plugins.sortlist({
-        id: 'sortingList1'
-    });
-
-    $.plugins.slide({
-        id: 'slide1',
-        speed: 3000
-    });
 })();

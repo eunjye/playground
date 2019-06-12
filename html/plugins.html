@@ -176,24 +176,26 @@
 
     <section class="section">
         <h1 class="tit-section">슬라이드</h1>
-        <pre>
-            기능 : 
-            - 맨 처음에 <code>div.ej-slide-wrap>ul>li</code>만 있어도 전체 컴포넌트 자동으로 그려줌
-            - 따로 width, height값 주지 않아도 자동적으로 계산 및 적응
-            - 무한 움직임
-            - 일시정지/재생 조작
-            - 정지 상태에서 컨트롤러 누르거나, 좌/우 버튼 누르면 자동 재생
-            - 현재 페이지보다 다음 페이지는 우측 또는 아래에서, 이전 페이지는 좌측 또는 위에서 슬라이드
-            - 현재 페이지가 아닌 페이지는 &nbsp;&nbsp;<code>display: none;</code>
-            - 현재 페이지에 맞춰 페이징버튼 색상 변환
-        </pre>
-        <pre>
-            옵션 값 : 
-            - 일시정지/재생 버튼, 컨트롤러 버튼, 좌/우 조작 버튼 옵션에서 유/무 선택
-            - 상하/좌우 슬라이드 방향
-            - 슬라이드 넘어가는 시간
-            - 시작 페이지 설정
-        </pre>
+        <p>
+            <pre>
+                기능 : 
+                - 맨 처음에 <code>div.ej-slide-wrap>ul>li</code>만 있어도 전체 컴포넌트 자동으로 그려줌
+                - 따로 width, height값 주지 않아도 자동적으로 계산 및 적응
+                - 무한 움직임
+                - 일시정지/재생 조작
+                - 정지 상태에서 컨트롤러 누르거나, 좌/우 버튼 누르면 페이지 이동
+                - 현재 페이지보다 다음 페이지는 우측 또는 아래에서, 이전 페이지는 좌측 또는 위에서 슬라이드
+                - 현재 페이지가 아닌 페이지는 &nbsp;&nbsp;<code>display: none;</code>
+                - 현재 페이지에 맞춰 페이징버튼 색상 변환
+            </pre>
+            <pre>
+                옵션 값 : 
+                - 일시정지/재생 버튼, 컨트롤러 버튼, 좌/우 조작 버튼 옵션에서 유/무 선택
+                - 상하/좌우 슬라이드 방향
+                - 슬라이드 넘어가는 시간
+                - 시작 페이지 설정
+            </pre>
+        </p>
 
         <div class="ej-slide-wrap" id="slide1">
             <div class="ej-slide">
@@ -246,5 +248,34 @@
         </div>
     </section>
     <script src="/resources/js/ej.plugins.js"></script>
+    <script>
+    
+    /* 작동시키기 */
+    $.plugins.accordion({
+        id: 'accordion1',
+        speed: 200,
+        allClose: true // 활성화 시 다른 탭 닫음
+    });
+    $.plugins.accordion({
+        id: 'accordion3',
+        speed: 200,
+        allClose: true // 활성화 시 다른 탭 닫음
+    });
+
+    $.plugins.accordion({
+        id: 'accordion2',
+        speed: 200,
+        allClose: false // 활성화 시 다른 탭 닫음
+    });
+
+    $.plugins.sortlist({
+        id: 'sortingList1'
+    });
+
+    $.plugins.slide({
+        id: 'slide1',
+        speed: 1000
+    });
+    </script>
 </body>
 </html>
