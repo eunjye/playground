@@ -5,8 +5,13 @@
         $.plugins = { _unique: 0 };
     }
 
-    // 아코디언, 아이템 정렬
-    $.extend(true, $.plugins, {
+    /** [$.extend와 $.fn.extend의 차이]
+    $.extend: 함수; DOM에서 바로 접근 불가능. => this를 사용하여 DOM에 접근 불가. Object들의 merge용으로만 생각하자.
+    $.fn.extend: jQuery의 프로토타입에 확장. 메소드; DOM에서 바로 접근 가능. jQuery.fn == jQuery.prototype
+    */
+    // true : obj2의 값을 obj1에 recursively하게 합침. key 값이 겹치는 부분의 값만 덮어쓰기.
+    // ({}, obj1, obj2) : obj1의 값을 변경하지 않고 합침.
+    $.fn.extend(true, $.plugins, {  
         /* 아코디언 */
         accordion: function(opt){
             var id = opt.id,
@@ -173,6 +178,7 @@
         /* 슬라이드 */
         slide: (() => {
 
+
             function createSlide(opt){
                 var id = (opt.id === undefined) ? console.error('id값이 없어요') : opt.id,
                     $wrap = $('#' + id),
@@ -181,10 +187,11 @@
                     $currPage = $page.filter('.active'),
                     $nextPage = null,
                     $prevPage = null,
-                    $btn = $wrap.find('.btn-slide'),
-                    $btnToggle = $btn.filter('.toggle'),
-                    $btnNext = $btn.filter('.next'),
-                    $btnPrev = $btn.filter('.prev'),
+                    $btn = null,
+                    $btnToggle = null,
+                    $btnNext = null,
+                    $btnPrev = null,
+                    $btnPaging = null,
                     currIndex = $currPage.index(),
 
                     speed = (opt.speed === undefined) ? 3000 : opt.speed,
@@ -193,7 +200,7 @@
                     play = 1,  // 재생 상태
                     curr = 0;  // 현재 페이지 인덱스
                     
-                draw();
+                drawSlideByOption(opt);
                 resizeBox(0);  // 초기화
                 setPage();
 
@@ -201,51 +208,70 @@
                     nextSlide();
                 }, speed);
 
-                $btnToggle
-                    .off('click.toggleSlide')
-                    .on('click.toggleSlide', function(){
-                        switch (play){
-                            case 1: {  // 재생 중
-                                clearInterval(flowSlide);
-                                $btnToggle.text('슬라이드 재생');
-                                play = 0;
-                                break;
-                            };
-                            case 0: {  // 정지 상태
-                                flowSlide = setInterval(function(){
-                                    nextSlide();
-                                }, speed);
-                                $btnToggle.text('슬라이드 정지');
-                                play = 1;
-                                break;
-                            }
-                        }
-                });
 
-                $btnPrev
-                    .off('click.toPrevSlide')
-                    .on('click.toPrevSlide', function(){
-                        prevSlide();
-                });
-
-                $btnNext
-                    .off('click.toNextSlide')
-                    .on('click.toNextSlide', function(){
-                        nextSlide();
-                        clearInterval(flowSlide);
-                        switch (play){
-                            case 1: {
-                                flowSlide = setInterval(function(){
-                                    nextSlide();
-                                }, speed);
-                                break;
-                            }
-                        }
-                });
                 
 
-                function draw(){  // 컴포넌트 자동 생성
-
+                // 옵션에 따라 함수 실행
+                function drawSlideByOption(opt){  // 컴포넌트 자동 생성
+                    // 페이지 전환 버튼 생성 여부
+                    if (opt.useBtnController === undefined || !!opt.useBtnController) {
+                        $btnPaging = $wrap.find('.btn-paging');
+                        // $btnPaging.
+                    } else if(!opt.useBtnController) {
+                        console.info(`${id}의 페이지 이동 컴포넌트가 없습니다.`);
+                    };
+                    // 재생/정지, 다음, 이전 버튼 생성 여부
+                    if (opt.useBtnPlay === undefined || !!opt.useBtnPlay) {(
+                        function(){
+                            $btn = $wrap.find('.btn-slide');
+                            $btnNext = $btn.filter('.next');
+                            $btnPrev = $btn.filter('.prev');
+                            $btnToggle = $btn.filter('.toggle');
+                            $btnPrev
+                                .off('click.toPrevSlide')
+                                .on('click.toPrevSlide', function(){
+                                    prevSlide();
+                            });
+            
+                            $btnNext
+                                .off('click.toNextSlide')
+                                .on('click.toNextSlide', function(){
+                                    nextSlide();
+                                    clearInterval(flowSlide);
+                                    switch (play){
+                                        case 1: {
+                                            flowSlide = setInterval(function(){
+                                                nextSlide();
+                                            }, speed);
+                                            break;
+                                        }
+                                    }
+                            });
+                            
+                            $btnToggle
+                                .off('click.toggleSlide')
+                                .on('click.toggleSlide', function(){
+                                    switch (play){
+                                        case 1: {  // 재생 중
+                                            clearInterval(flowSlide);
+                                            $btnToggle.text('슬라이드 재생');
+                                            play = 0;
+                                            break;
+                                        };
+                                        case 0: {  // 정지 상태
+                                            flowSlide = setInterval(function(){
+                                                nextSlide();
+                                            }, speed);
+                                            $btnToggle.text('슬라이드 정지');
+                                            play = 1;
+                                            break;
+                                        }
+                                    }
+                            });
+                        }
+                    )()} else if (!opt.useBtnPlay){
+                        console.info(`${id}의 슬라이드 제어 버튼이 없습니다.`)
+                    }
                 };
 
                 function setPage() {  // 페이지 갱신
@@ -274,10 +300,11 @@
                     }
                 };
                 function nextSlide(){  // 다음 슬라이드로 넘김
-                    var boxWidth = $currPage.outerWidth();
-                    $nextPage.show().css('left', boxWidth);
+                    var w = $currPage.outerWidth();
+                    $page.not($currPage).hide();
+                    $nextPage.show().css('left', w);
                     $slide.find('ul').stop().animate({
-                        left: -boxWidth
+                        left: -w
                     }, aniSpeed, function(){
                         $prevPage.removeClass('active');
                         $currPage.show().addClass('active').css('left', 0);
@@ -291,9 +318,6 @@
                     setPage();
                     resizeBox();
 
-                    function newFunction() {
-                        $nextPage.css('float', 'right');
-                    }
                 };
                 function prevSlide(){  // 이전 슬라이드로 넘김
     

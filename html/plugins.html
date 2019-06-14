@@ -175,7 +175,7 @@
     </section>
 
     <section class="section">
-        <h1 class="tit-section">슬라이드</h1>
+        <h1 class="tit-section">슬라이드 (보류 ㅠ)</h1>
         <p>
             <pre>
                 기능 : 
@@ -200,32 +200,32 @@
         <div class="ej-slide-wrap" id="slide1">
             <div class="ej-slide">
                 <ul>
-                    <li class="ej-slide-page active">
+                    <li class="ej-slide-page active" data-slide-page="slide1-n1">
                         <div style="background: pink; width: 120px; height: 120px;">
                             1
                         </div>
                     </li>
-                    <li class="ej-slide-page">
+                    <li class="ej-slide-page" data-slide-page="slide1-n2">
                         <div style="background: yellow; width: 150px; height: 150px;">
                             2
                         </div>
                     </li>
-                    <li class="ej-slide-page">
+                    <li class="ej-slide-page" data-slide-page="slide1-n3">
                         <div style="background: skyblue; width: 200px; height: 200px;">
                             3
                         </div>
                     </li>
-                    <li class="ej-slide-page">
+                    <li class="ej-slide-page" data-slide-page="slide1-n4">
                         <div style="background: greenyellow; width: 150px; height: 140px;">
                             4
                         </div>
                     </li>
-                    <li class="ej-slide-page">
+                    <li class="ej-slide-page" data-slide-page="slide1-n5">
                         <div style="background: purple; width: 250px; height: 250px;">
                             5
                         </div>
                     </li>
-                    <li class="ej-slide-page">
+                    <li class="ej-slide-page" data-slide-page="slide1-n6">
                         <div style="background: orange; width: 140px; height: 240px;">
                             6
                         </div>
@@ -233,12 +233,12 @@
                 </ul>
             </div>
             <div class="slide-nav">
-                <a href="#" class="btn-paging active">1번째 슬라이드로 이동</a>
-                <a href="#" class="btn-paging">2번째 슬라이드로 이동</a>
-                <a href="#" class="btn-paging">3번째 슬라이드로 이동</a>
-                <a href="#" class="btn-paging">4번째 슬라이드로 이동</a>
-                <a href="#" class="btn-paging">5번째 슬라이드로 이동</a>
-                <a href="#" class="btn-paging">6번째 슬라이드로 이동</a>
+                <a href="[data-slide-page='slide1-n1']" class="btn-paging active">1번째 슬라이드로 이동</a>
+                <a href="[data-slide-page='slide1-n2']" class="btn-paging">2번째 슬라이드로 이동</a>
+                <a href="[data-slide-page='slide1-n3']" class="btn-paging">3번째 슬라이드로 이동</a>
+                <a href="[data-slide-page='slide1-n4']" class="btn-paging">4번째 슬라이드로 이동</a>
+                <a href="[data-slide-page='slide1-n5']" class="btn-paging">5번째 슬라이드로 이동</a>
+                <a href="[data-slide-page='slide1-n6']" class="btn-paging">6번째 슬라이드로 이동</a>
             </div>
             <div class="slide-btn-wrap">
                 <button type="button" class="btn-slide next">다음 슬라이드</button>
@@ -246,6 +246,9 @@
                 <button type="button" class="btn-slide toggle">슬라이드 정지</button>
             </div>
         </div>
+    </section>
+    <section class="section">
+        <h1 class="tit-section"></h1>
     </section>
     <script src="/resources/js/ej.plugins.js"></script>
     <script>
@@ -274,7 +277,9 @@
 
     $.plugins.slide({
         id: 'slide1',
-        speed: 1000
+        speed: 3000,
+        useBtnPlay: true,
+        useBtnController: false
     });
     </script>
 </body>
