@@ -1,0 +1,302 @@
+@charset "UTF-8";
+@import './common/reset';  // 스타일 초기화
+@import './common/variables';  // 전역변수
+@import './common/mixins';  // 믹스인
+body, button, a, p, pre{
+    font-family: $G-font-family-ko;
+}
+html{
+    overflow-x: hidden;
+}
+body{
+    overflow-x: hidden;
+    padding-bottom: 50px;
+}
+section.section{
+    margin: 20px 0;
+    padding: 20px 0;
+    background: #f4f4f4;
+
+    &:first-child{
+        margin-top: 0;
+    }
+}
+h1.tit-section{
+    margin: 0 20px 10px;
+}
+
+/* accordion */
+.ej-acco{
+    $line-color: #ddd;
+    
+    margin: 10px 0;
+
+    .acco-list{
+        background: #fff;
+        border-bottom: 1px solid $line-color;
+
+        &:first-child{
+            border-top: 1px solid $line-color;
+        }
+
+        &.active{
+            .acco-title{
+                &:before{
+                    top: 28px;
+                    transform: rotate(45deg);
+                    transform-origin: right top;
+                    
+                }
+
+                &:after{
+                    top: 28px;
+                    transform: rotate(-45deg);
+                    transform-origin: left top;
+                }
+            }
+
+            .acco-inner{
+                display: block !important;
+            }
+        }
+        
+        .acco-title{
+            position: relative;
+            padding: 15px 20px;
+            font-size: 14px;
+            color: #222;
+            cursor: pointer;
+
+            &:before, &:after{
+                position: absolute;
+                top: 19px;
+                display: block;
+                width: 12px;
+                height: 1px;background: #000;
+                transition: all .2s ease-in;
+                content: "";
+            }
+
+            &:before{
+                right: 37px;
+                transform: rotate(-45deg);
+                transform-origin: right top;
+            }
+
+            &:after{
+                right: 25px;
+                transform: rotate(45deg);
+                transform-origin: left top;
+            }
+        }
+
+        .acco-inner{
+            display: none;
+            padding: 15px 20px;
+            background: #f5f5f5;
+            border-top: 1px solid #dedede;
+            font-size: 13px;
+            color: #444;
+            overflow: hidden;
+        }
+    }
+}
+
+/* sorting list */
+.ej-sort-wrap{
+    margin-top: 20px;
+}
+.ej-sort-list{
+    background: #fff;
+
+    .sort-item{
+        position: relative;
+        display: table;
+        width: 100%;
+        padding: 25px 20px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+        font-weight: $G-font-weight-bold;
+        font-size: $G-font-size-large;
+        color: #444;
+        background: #fff;
+
+        &:first-child{
+            border-top: 1px solid #ddd;
+        }
+
+        &.moving{
+            z-index: 2;
+            border-top: 1px solid #ddd;
+            opacity: .8;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+        }
+
+        &.no-num{
+            .sort-num{
+                display: none;
+            }
+        }
+
+        & > span, & > div{
+            display: table-cell;
+            vertical-align: middle;
+            font-weight: $G-font-weight-regular;
+        }
+
+        .sort-title{
+            font-size: $G-font-size-normal;
+            text-align: left;
+        }
+
+        .sort-num{
+            width: 25px;
+            text-align: left;
+            font-size: $G-font-size-large;
+        }
+
+        .sort-name{
+            line-height: 1.4;
+        }
+
+        .sort-inner{
+            color: $G-font-color-light;
+        }
+
+        .txt-label{
+            padding: 0 3px 2px;
+            background: rgb(206, 43, 43);
+            font-size: $G-font-size-small;
+            color: #fff;
+        }
+
+        .sort-btn-wrap{
+            width: 40px;
+            text-align: right;
+        }
+
+        .btn-sort{
+            @include sr-only(block);
+
+            top: auto !important;
+            width: 25px;
+            height: 25px;
+            background: url("/resources/image/ico-arrow-sort.png") center no-repeat;
+            background-size: auto 20px;
+        }
+    }
+
+    &ul{
+        .sort-item{
+            padding-left: 45px;
+
+            &:before{
+                position: absolute;
+                top: 0;
+                left: 20px;
+                bottom: 0;
+                display: block;
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                margin: auto;
+                background: #999;
+                content: "";
+            }
+        }
+    }
+
+    &.disabled{
+        $disable-font-color: #aaa; 
+
+        .sort-item{
+            color: $disable-font-color;
+
+            .sort-inner{
+                color: $disable-font-color;
+            }
+        }
+    }
+
+    & + .ej-sort-list{
+        margin-top: 20px;
+    }
+}
+
+.ej-sortable-placeholder{
+    & + .ej-sortable-handle{
+        transition: all .5s linear;
+    }
+
+    & + .sort-item{
+        border-top: 1px solid #ddd;
+    }
+}
+
+.sort-item{
+    &.moving{
+        transition: none;
+    }
+}
+
+/* slide */
+.ej-slide-wrap{
+    width: 100%;
+    height: auto;
+    text-align: center;
+
+    .ej-slide{
+        display: block;
+        width: auto;
+        height: auto; 
+        margin: 0 auto;
+        overflow: hidden;
+        
+        &> ul{
+            position: relative;
+
+            &:after{
+                @include clear;
+            }
+        }
+
+        .ej-slide-page{
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+
+            &.active{
+                display: block;
+            }
+        }
+    }
+
+    .slide-nav{
+        display: inline-block;
+        margin: 0 auto; 
+
+        .btn-paging{
+            @include sr-only(inline-block);
+
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background: blue;
+            border-radius: 50%;
+
+            &.active{
+                background: red;
+            }
+        }
+    }
+    
+    .slide-btn-wrap{
+        .btn-slide{
+            padding: 5px 10px;
+            background: #222;
+            color: #fff;
+            border-radius: 4px;
+        }
+    }
+}
