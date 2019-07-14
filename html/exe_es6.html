@@ -1,31 +1,71 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <script src="/resources/js/jquery-3.4.1.min.js"></script>
-    <title>JS 연습</title>
-    <style>
+<meta charset="UTF-8">
+<script src="/resources/js/jquery-3.4.1.min.js"></script>
+<title>JS 연습</title>
+<style>
+    /* 중앙정렬 */
     .box-center{width: 100%; height: 200px; text-align: center; background: blue;}
     .box-center:after{display: inline-block; width: 1px; height: 100%; vertical-align: middle; content: "";}
     .box-center span{display: inline-block; background: red; padding: 10px; vertical-align: middle;}
-    </style>
+    /* 리스트 구분점 스타일 */
+    .toggle-wrap{list-style-type: disc;}
+    .toggle-wrap .toggle-wrap{list-style-type: toggle(disc, circle, square);}
+</style>
 </head>
 <body>
-    <h1>스크립트 이론</h1>
-    <div class="box-center">
-        <span>가상선택자 이용한<br>중앙정렬</span>
-    </div>
-    <div id="log"></div>
-    <!-- 클로저 예제 
-    <button type="button" id="target0">0000</button>
-    <button type="button" id="target1">1111</button>
-    <button type="button" id="target2">2222</button>
-    <button type="button" id="target3">3333</button>
-    <button type="button" id="target4">4444</button>
-    -->
+    <main>
+        <article>
+            <h1>스크립트 이론</h1>
+            <div id="log"></div>
+            <!-- 클로저 예제 
+            <button type="button" id="target0">0000</button>
+            <button type="button" id="target1">1111</button>
+            <button type="button" id="target2">2222</button>
+            <button type="button" id="target3">3333</button>
+            <button type="button" id="target4">4444</button>
+            -->
 
-    <!-- 이벤트 객체 예제 -->
-    <a href="#" class="aaa">aaaa</a>
+            <!-- 이벤트 객체 예제 -->
+            <a href="#" class="aaa">aaaa</a>
+        </article>
+        <hr>
+        <article>
+            <h1>신기한 CSS 기법들</h1>
+            <h2>중앙정렬</h2>
+            <div class="box-center">
+                <span>가상선택자 이용한<br>중앙정렬</span>
+            </div>
+            <hr>
+            <h2>리스트 구분점 스타일</h2>
+            <ul class="toggle-wrap">
+                <li>1</li>
+                <li>2
+                    <ul class="toggle-wrap">
+                        <li>
+                            a
+                            <ul class="toggle-wrap">
+                                <li>
+                                    a
+                                        <ul class="toggle-wrap">
+                                            <li>a</li>
+                                            <li>b</li>
+                                            <li>c</li>
+                                        </ul>
+                                    </li>
+                                <li>b</li>
+                                <li>c</li>
+                            </ul>
+                        </li>
+                        <li>b</li>
+                        <li>c</li>
+                    </ul>
+                </li>
+                <li>3</li>
+            </ul>
+        </article>
+    </main>
     <script src="/resources/js/study-js.js"></script>
 </body>
 </html>

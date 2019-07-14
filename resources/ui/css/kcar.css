@@ -1,0 +1,91 @@
+div, ul, li, button, a, * { box-sizing: border-box; }
+
+.fc1 { color: #FF0040 !important; }
+
+a:hover { text-decoration: underline; }
+
+body { width: 100%; color: #666; letter-spacing: -0.5px; font-family: "Noto Sans CJK KR"; }
+
+.link-hide { position: absolute; top: -999px; display: block; width: 100%; background: #FF0040; color: #fff; text-align: center; }
+.link-hide:focus { top: 0; }
+
+.btn-list li { display: inline-block; margin-left: 35px; }
+.btn-list li:first-child { margin-left: 0; }
+.btn-list li .btn-icon { font-size: 12px; font-weight: 500; vertical-align: middle; }
+.btn-list li .btn-icon:before { display: inline-block; width: 20px; height: 20px; margin-right: 5px; background: #ccc; vertical-align: middle; content: ""; }
+
+.tab-nav { display: table; width: 100%; border: 1px solid #ddd; }
+.tab-nav li { display: table-cell; width: 33%; border-left: 1px solid #ddd; }
+.tab-nav li .btn-tab { width: 100%; text-align: center; font-size: 14px; font-weight: 600; letter-spacing: -1px; color: #444; }
+.tab-nav li .btn-tab:hover { text-decoration: underline; }
+.tab-nav li.active .btn-tab { padding: 18px 20px; background: #FF0040; color: #fff; }
+
+.radio-wrap { display: block; clear: both; content: ""; display: inline-block; }
+.radio-wrap .btn-radio { float: left; display: block; margin-left: 3px; }
+.radio-wrap .btn-radio:first-child { margin-left: 0; }
+
+.btn-radio { position: relative; display: inline-block; padding: 11px 20px; border: 1px solid #ddd; background: #fff; font-size: 13px; color: #444; }
+.btn-radio.active { background: #32333d; color: #fff; }
+.btn-radio:hover { text-decoration: underline; }
+.btn-radio input { position: absolute; left: -9999px; appearance: none; }
+
+.header-wrap { position: relative; }
+.header-wrap .menu-user-wrap { width: 100%; background: #f2f2f2; }
+.header-wrap .menu-user-wrap .menu-user { width: 1200px; margin: 0 auto; text-align: right; }
+.header-wrap .menu-user-wrap .menu-user li { display: inline-block; margin-left: 10px; }
+.header-wrap .menu-user-wrap .menu-user li:first-child { margin-left: 0; }
+.header-wrap .menu-user-wrap .menu-user li .btn-user { display: inline-block; margin: 13px 0; font-size: 12px; font-weight: 500; }
+.header-wrap .menu-user-wrap .menu-user li .btn-user.type2 { color: #fff; background: #2d2d38; padding: 13px 15px; margin: 0 0 0 10px; }
+.header-wrap .menu-user-wrap .menu-user:after { display: block; clear: both; content: ""; }
+
+.menu-wrap { position: relative; width: 1200px; height: 85px; margin: 0 auto; text-align: center; }
+.menu-wrap .slide-banner { float: left; width: 300px; height: 85px; background: #eee; }
+.menu-wrap .logo-main { display: block; text-indent: -9999px; color: transparent; font-size: xx-small; overflow: hidden; position: absolute; left: 50%; bottom: 0; margin-left: -75px; }
+.menu-wrap .logo-main a { display: block; width: 150px; height: 60px; background: #ddd; }
+.menu-wrap .btn-list { float: right; margin-top: 35px; text-align: right; }
+.menu-wrap:before { display: inline-block; width: 0; height: 100%; vertical-align: bottom; content: ""; }
+.menu-wrap:after { display: block; clear: both; content: ""; }
+
+.menu-main-wrap { position: relative; border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; }
+.menu-main-wrap:before { position: absolute; left: 0; top: 60px; display: block; width: 100%; height: 1px; background: #888; content: ""; }
+.menu-main-wrap .menu-main-inner { width: 1200px; margin: 0 auto; }
+.menu-main-wrap .menu-main-inner .menu-main { float: left; }
+.menu-main-wrap .menu-main-inner .menu-main > li { position: relative; float: left; display: block; margin-left: 15px; }
+.menu-main-wrap .menu-main-inner .menu-main > li:first-child { margin-left: 0; }
+.menu-main-wrap .menu-main-inner .menu-main > li.active .btn-main { height: 61px; color: #FF0040; font-weight: 500; border-bottom-color: #FF0040; }
+.menu-main-wrap .menu-main-inner .menu-main > li.active .menu-sub { display: block; }
+.menu-main-wrap .menu-main-inner .menu-main .tit-list { display: inline-block; font-size: 14px; }
+.menu-main-wrap .menu-main-inner .menu-main .btn-main { display: inline-block; min-width: 50px; height: 60px; border-bottom: 2px solid transparent; padding: 18px 25px; color: #000; font-size: 16px; font-weight: 400; text-decoration: none; overflow: hidden; }
+.menu-main-wrap .menu-main-inner .menu-main .btn-main.live-view { display: inline-block; text-indent: -9999px; color: transparent; font-size: xx-small; overflow: hidden; width: 200px; background: url("/resources/image/kcar/icon-liveview.jpg") center no-repeat; }
+.menu-main-wrap .menu-main-inner .menu-main .btn-main.btn-more { display: inline-block; text-indent: -9999px; color: transparent; font-size: xx-small; overflow: hidden; float: left; border: 1px solid #e6e6e6; border-width: 0 1px; }
+.menu-main-wrap .menu-main-inner .menu-main .menu-sub { position: relative; display: none; width: 100%; height: 50px; }
+.menu-main-wrap .menu-main-inner .menu-main .menu-sub ul { position: absolute; left: 50%; width: 660px; margin-left: -330px; text-align: center; }
+.menu-main-wrap .menu-main-inner .menu-main .menu-sub ul li { display: inline-block; margin-left: 20px; }
+.menu-main-wrap .menu-main-inner .menu-main .menu-sub ul li:first-child { margin-left: 0; }
+.menu-main-wrap .menu-main-inner .menu-main .menu-sub ul li.active .btn-detail { color: #000; border-bottom: 1px solid #000; }
+.menu-main-wrap .menu-main-inner .menu-main .menu-sub ul .btn-detail { display: inline-block; height: 50px; padding-left: 10px; padding-right: 10px; line-height: 50px; font-size: 14px; font-weight: 500; text-decoration: none; }
+.menu-main-wrap .menu-main-inner .menu-main .menu-sub ul:after { display: block; clear: both; content: ""; }
+.menu-main-wrap .menu-main-inner .txt-nav { float: right; margin-top: 14px; color: #000; font-size: 16px; font-weight: 600; }
+.menu-main-wrap .menu-main-inner .txt-nav strong { color: #FF0040; font-size: 19px; }
+.menu-main-wrap .menu-main-inner:after { display: block; clear: both; content: ""; }
+
+main .section-visual { width: 100%; height: 420px; padding: 40px 20px; background: #e4f9fd; text-align: center; }
+main .section-visual .tit-box { color: #000; }
+main .section-visual .tit-box h2 { font-size: 36px; }
+main .section-visual .tit-box p { font-size: 23px; margin-top: 12px; }
+main .section-visual .cont-box { display: inline-block; margin-top: 25px; padding: 7px 55px; background: #FF0040; border-radius: 20px; color: #fff; font-size: 16px; }
+main .section-visual .cont-box strong { font-weight: 600; font-size: 18px; }
+main .section-main { width: 1200px; margin: 0 auto; }
+main .section-main.tab-wrap { margin-top: -180px; background: #fff; box-shadow: 0 2px 20px rgba(150, 150, 150, 0.3); }
+main .tab-wrap .tab-content { padding: 30px 70px; }
+main .tab-wrap .tab-content .inner-header:after { display: block; clear: both; content: ""; }
+main .tab-wrap .tab-content .inner-header h3 { float: left; font-size: 16px; font-weight: 500; color: #222; }
+main .tab-wrap .tab-content .inner-header .search-box { float: right; position: relative; width: 300px; height: 35px; padding: 0 0 0 45px; border: 0; border-bottom: 2px solid #FF0040; }
+main .tab-wrap .tab-content .inner-header .search-box:before { position: absolute; top: 0; left: 0; display: block; width: 25px; height: 100%; margin-right: 10px; background: #fdffe4; content: ""; border: none; }
+main .tab-wrap .tab-content .inner-header .search-box .search-input { border: none; width: 100%; height: 33px; }
+main .tab-wrap .tab-content .inner-header .search-box .search-input::placeholder { color: #ccc; font-size: 12px; }
+main .tab-wrap .tab-content .inner-header .search-box .search-input::-moz-input-placeholder { color: #ccc; }
+main .tab-wrap .tab-content .inner-header .search-box .search-input::-o-input-placeholder { color: #ccc; }
+main .tab-wrap .tab-content .inner-header .search-box .search-input::-ms-input-placeholder { color: #ccc; }
+main .tab-wrap .tab-content .inner-header .search-box .search-input::-webkit-input-placeholder { color: #ccc; }
+main .tab-wrap .tab-content .inner-body { margin-top: 10px; }

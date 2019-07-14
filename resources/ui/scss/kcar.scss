@@ -1,0 +1,286 @@
+@charset 'UTF-8';
+div, ul, li, button, a, *{box-sizing: border-box;}
+$max-width: 1200px;
+$m-color: #FF0040;
+$fs-sm: 12px;
+$fs-r: 13px;
+$fs-m: 14px;
+$fs-l: 16px;
+$fc-xs: #ccc;
+$fc-m: #444;
+$fc-l: #222;
+$fc-xl: #000;
+$fw-m: 500;
+$fw-r: 400;
+$fw-b: 600;
+$ff-kr: 'Noto Sans CJK KR';
+// common
+@mixin clear{
+    display: block; clear: both; content: "";
+}
+@mixin sr-only($type){
+    @if ($type == block) {
+        display: block;
+    } @else if ($type == inline-block) {
+        display: inline-block;
+    }
+    text-indent: -9999px; color: transparent; font-size: xx-small; overflow: hidden;
+}
+.fc1{
+    color: $m-color !important;
+}
+a{
+    &:hover{
+        text-decoration: underline;
+    }
+}
+body{
+    width: 100%; color: #666; letter-spacing: -0.5px; font-family: $ff-kr;
+}
+.link-hide{
+    position: absolute; top: -999px; display: block; width: 100%; background: $m-color; color: #fff; text-align: center; 
+    &:focus{
+        top: 0;
+    }
+}
+.btn-list{
+    li{
+        &:first-child{
+            margin-left: 0;
+        }
+        display: inline-block; margin-left: 35px;
+        .btn-icon{
+            &:before{
+                display: inline-block; width: 20px; height: 20px; margin-right: 5px; background: #ccc; vertical-align: middle; content: "";
+            }
+            font-size: $fs-sm; font-weight: $fw-m; vertical-align: middle;
+        }
+    }
+}
+// tab-nav
+.tab-nav{
+    display: table; width: 100%; border: 1px solid #ddd;
+    li{
+        display: table-cell; width: 33%; border-left: 1px solid #ddd;
+        .btn-tab{
+            width: 100%; text-align: center; font-size: $fs-m; font-weight: $fw-b; letter-spacing: -1px; color: $fc-m;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+        &.active{
+            .btn-tab{
+                padding: 18px 20px; background: $m-color; color: #fff;
+            }
+        }
+    }
+}
+// btn-radio
+.radio-wrap{
+    @include clear;
+    display: inline-block;
+    .btn-radio{
+        float: left; display: block; margin-left: 3px;
+        &:first-child{
+            margin-left: 0;
+        }
+    }
+}
+.btn-radio{
+    position: relative; display: inline-block; padding: 11px 20px; border: 1px solid #ddd; background: #fff; font-size: $fs-r; color: $fc-m;
+    &.active{
+        background: #32333d; color: #fff;
+    }
+    &:hover{
+        text-decoration: underline;
+    }
+    input{
+        position: absolute; left: -9999px; appearance: none;
+    }
+}
+// header
+.header-wrap{
+    position: relative;
+    .menu-user-wrap{
+        width: 100%; background: #f2f2f2;
+        .menu-user{
+            width: $max-width; margin: 0 auto; text-align: right;
+            li{
+                display: inline-block; margin-left: 10px;
+                &:first-child{
+                    margin-left: 0;
+                }
+                .btn-user{
+                    display: inline-block; margin: 13px 0; font-size: $fs-sm; font-weight: $fw-m;
+                    &.type2{
+                        color: #fff; background: #2d2d38; padding: 13px 15px; margin: 0 0 0 10px;
+                    }
+                }
+            }
+            &:after{
+                @include clear;
+            }
+        }
+    }
+}
+.menu-wrap{
+    position: relative; width: $max-width; height: 85px; margin: 0 auto; text-align: center;
+    .slide-banner{
+        float: left; width: 300px; height: 85px; background: #eee;
+    }
+    .logo-main{
+        @include sr-only(block);
+        position: absolute; left: 50%; bottom: 0; margin-left: -75px;
+        a{
+            display: block; width: 150px; height: 60px; background: #ddd;
+        }
+    }
+    .btn-list{
+        float: right; margin-top: 35px; text-align: right;
+    }
+    &:before{
+        display: inline-block; width: 0; height: 100%; vertical-align: bottom; content: "";
+    }
+    &:after{
+        @include clear;
+    }
+}
+.menu-main-wrap{
+    &:before{
+        position: absolute; left: 0; top: 60px; display: block; width: 100%; height: 1px; background: #888; content: "";
+    }
+    position: relative; border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; 
+    .menu-main-inner{
+        width: $max-width; margin: 0 auto;
+        .menu-main{
+            float: left;
+            &> li{
+                position: relative; float: left; display: block; margin-left: 15px;
+                &:first-child{
+                    margin-left: 0;
+                }
+                &.active{  // active menu
+                    .btn-main{
+                        height: 61px; color: $m-color; font-weight: $fw-m; border-bottom-color: $m-color;
+                    }
+                    .menu-sub{
+                        display: block;
+                    }
+                }
+            }
+            .tit-list{
+                display: inline-block; font-size: $fs-m;
+            }
+            .btn-main{
+                display: inline-block; min-width: 50px; height: 60px; border-bottom: 2px solid transparent; padding: 18px 25px; color: $fc-xl; font-size: $fs-l; font-weight: $fw-r; text-decoration: none; overflow: hidden;
+                &.live-view{
+                    @include sr-only(inline-block);
+                    width: 200px; background: url('/resources/image/kcar/icon-liveview.jpg') center no-repeat;
+                }
+                &.btn-more{
+                    @include sr-only(inline-block);
+                    float: left; border: 1px solid #e6e6e6; border-width: 0 1px; 
+                }
+            }
+            .menu-sub{ // todo
+                position: relative; display: none; width: 100%; height: 50px; 
+                ul{
+                    position: absolute; left: 50%; width: 660px; margin-left: -330px; text-align: center;
+                    li{
+                        &:first-child{
+                            margin-left: 0;
+                        }
+                        display: inline-block; margin-left: 20px; 
+                        &.active{
+                            .btn-detail{
+                                color: $fc-xl; border-bottom: 1px solid #000;
+                            }
+                        }
+                    }
+                    .btn-detail{
+                        display: inline-block; height: 50px; padding-left: 10px; padding-right: 10px; line-height: 50px; font-size: $fs-m; font-weight: $fw-m; text-decoration: none;
+                    }
+                    &:after{
+                        @include clear;
+                    }
+                }
+            }
+        }
+        .txt-nav{
+            float: right; margin-top: 14px; color: $fc-xl; font-size: $fs-l; font-weight: $fw-b; 
+            strong{
+                color: $m-color; font-size: 19px;
+            }
+        }
+        &:after{
+            @include clear;
+        }
+    }
+}
+// body
+main{
+    .section-visual{
+        width: 100%; height: 420px; padding: 40px 20px; background: rgb(228, 249, 253); text-align: center;
+        .tit-box{
+            color: $fc-xl;
+            h2{
+                font-size: 36px;
+            }
+            p{
+                font-size: 23px; margin-top: 12px;
+            }
+        }
+        .cont-box{
+            display: inline-block; margin-top: 25px; padding: 7px 55px; background: $m-color; border-radius: 20px; color: #fff; font-size: $fs-l;
+            strong{
+                font-weight: $fw-b; font-size: 18px;
+            }
+        }
+    }
+    .section-main{
+        width: $max-width; margin: 0 auto;
+        &.tab-wrap{
+            margin-top: -180px; background: #fff; box-shadow: 0 2px 20px rgba(150, 150, 150, 0.3);
+        }
+    }
+    .tab-wrap{
+        .tab-content{
+            padding: 30px 70px;
+            .inner-header{
+                &:after{
+                    @include clear;
+                }
+                h3{
+                    float: left; font-size: $fs-l; font-weight: $fw-m; color: $fc-l;
+                } 
+                .search-box{
+                    float: right; position: relative; width: 300px; height: 35px; padding: 0 0 0 45px; border: 0; border-bottom: 2px solid $m-color;
+                    &:before{
+                        position: absolute; top: 0; left: 0; display: block; width: 25px; height: 100%; margin-right: 10px; background: #fdffe4; content: ""; border: none;
+                    }
+                    .search-input{
+                        border: none; width: 100%; height: 33px;
+                        &::placeholder{
+                            color: $fc-xs; font-size: $fs-sm;
+                        }
+                        &::-moz-input-placeholder{
+                            color: $fc-xs;
+                        }
+                        &::-o-input-placeholder{
+                            color: $fc-xs;
+                        }
+                        &::-ms-input-placeholder{
+                            color: $fc-xs;
+                        }
+                        &::-webkit-input-placeholder{
+                            color: $fc-xs;
+                        }
+                    }
+                }
+            }
+            .inner-body{
+                margin-top: 10px;
+            }
+        }
+    }
+}
