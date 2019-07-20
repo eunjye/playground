@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+  <title>Calendar</title>
+</head>
+<body>
+  <div class="ui_calendar"></div>
+  
+  <script type="text/jaascript">
+    $(document).ready(function(){
+      // 초기 세팅
+      createCalendar();
+      drawCalendar(2019, 6);
+      
+      function createCalendar() {
+        var $wrap = $('.ui_calendar'),
+            $inner = '';
+        
+        // inner content 생성
+        $inner += '<div class="ui_calendar_btns">';
+        $inner += '<button type="button" class="btn_prev_m">이전</button>';
+        $inner += '<button type="button" class="btn_next_m">다음</button>';
+        $inner += '</div>';
+        $inner += '<div class="ui_calendar_info">';
+        $inner += '<span class="ui_calendar_year"></span>';
+        $inner += '<span class="ui_calendar_month"></span>';
+        $inner += '</di>';
+        $inner += '<table class="ui_calendar_tbl">';
+        $inner += '<thead><tr></tr></thead><tbody></tbody>';
+        $inner += '</table>';
+        $wrap.prepend($inner);
+        
+        var theadDay = ['일', '월', '화', '수', '목', '금', '토'];
+        
+        for (var d = 0; d < theadDay.length; d++){
+          $wrap.find('thead tr').append('<th class="th_day' + d + '">' + theadDay[d] + '</th>');
+          
+          var $btnNext = $('.btn_next_m'),
+              $btnPrev = $('.btn_prev_m'),
+              $txtYY = $('.ui_calendar_year'),
+              $txtMM = $('.ui_calendar_month'),
+              
+              $tr = {},
+              $td = {};
+          
+          var today = new Date(),
+              date = new Date();
+          
+          // 초기 세팅
+          var yy = today.getFullYear(),
+              mm = today.getMonth(),
+              day = today.getDay();
+        }
+        
+        // 해당 월의 일 다 뽑아내기
+        function getDates(yy, mm){
+          var arrDate = [],
+              dd = 1;
+          
+          var date = new Date(),
+              $txtYY = $('.ui_calendar_year'),
+              $txtMM = $('.ui_calendar_month');
+          
+          date.getFullYear(yy);
+          date.setMonth(mm);
+        }
+      }
+            // to-be...
+    })
+  </script>
+</body>
+</html>
