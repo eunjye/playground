@@ -77,3 +77,35 @@ h1.tit-section { margin: 0 20px 10px; }
 .ej-slide-wrap .slide-nav .btn-paging { display: inline-block; text-indent: -9999px; color: transparent; font-size: xx-small; overflow: hidden; width: 10px; height: 10px; margin: 0 5px; background: blue; border-radius: 50%; }
 .ej-slide-wrap .slide-nav .btn-paging.active { background: red; }
 .ej-slide-wrap .slide-btn-wrap .btn-slide { padding: 5px 10px; background: #222; color: #fff; border-radius: 4px; }
+
+.ui_calendar { position: relative; display: block; width: 500px; margin: 50px auto; background: #fff; padding: 50px; box-shadow: 2px 2px 20px rgba(100, 100, 100, 0.2); }
+.ui_calendar .ui_calendar_btns { z-index: 1; position: absolute; top: 35px; left: 0; width: 100%; padding: 50px; }
+.ui_calendar .ui_calendar_btns .btn_next_m, .ui_calendar .ui_calendar_btns .btn_prev_m { display: block; text-indent: -9999px; color: transparent; font-size: xx-small; overflow: hidden; width: 30px; height: 30px; border-radius: 50%; background: #fff; transition: background ease-in .2s; }
+.ui_calendar .ui_calendar_btns .btn_next_m:hover, .ui_calendar .ui_calendar_btns .btn_prev_m:hover { background: #f8f8f8; }
+.ui_calendar .ui_calendar_btns .btn_next_m:active, .ui_calendar .ui_calendar_btns .btn_prev_m:active { transition: none; background: #e9e9e9; }
+.ui_calendar .ui_calendar_btns .btn_next_m:before, .ui_calendar .ui_calendar_btns .btn_prev_m:before { position: relative; display: block; width: 20px; height: 20px; margin: 5px auto; border-left: 1px solid #bbb; border-top: 1px solid #bbb; content: ""; }
+.ui_calendar .ui_calendar_btns .btn_next_m.disabled, .ui_calendar .ui_calendar_btns .btn_prev_m.disabled { cursor: not-allowed; background: #fff; }
+.ui_calendar .ui_calendar_btns .btn_next_m.disabled:before, .ui_calendar .ui_calendar_btns .btn_prev_m.disabled:before { border-color: #e5e5e5; }
+.ui_calendar .ui_calendar_btns .btn_prev_m { float: left; }
+.ui_calendar .ui_calendar_btns .btn_prev_m:before { left: 5px; transform: rotate(-45deg); }
+.ui_calendar .ui_calendar_btns .btn_next_m { float: right; }
+.ui_calendar .ui_calendar_btns .btn_next_m:before { right: 5px; transform: rotate(135deg); }
+.ui_calendar .ui_calendar_info { position: relative; margin-bottom: 30px; text-align: center; line-height: 25px; }
+.ui_calendar .ui_calendar_info .ui_calendar_year { display: block; font-size: 18px; font-weight: 600; color: #000; }
+.ui_calendar .ui_calendar_info .ui_calendar_month { display: inline-block; padding: 10px; margin-top: 2px; font-size: 30px; font-weight: 600; }
+.ui_calendar .ui_calendar_tbl { width: 100%; }
+.ui_calendar .ui_calendar_tbl td, .ui_calendar .ui_calendar_tbl th { text-align: center; }
+.ui_calendar .ui_calendar_tbl thead th { padding-bottom: 12px; border-bottom: 1px solid #efefef; font-size: 16px; font-weight: 400; color: #222; }
+.ui_calendar .ui_calendar_tbl .th_day0, .ui_calendar .ui_calendar_tbl .day_sun { color: #ff3b31; }
+.ui_calendar .ui_calendar_tbl .th_day6, .ui_calendar .ui_calendar_tbl .day_sat { color: #094cc9; }
+.ui_calendar .ui_calendar_tbl tbody td { padding-top: 10px; }
+.ui_calendar .ui_calendar_tbl tbody td button { width: 30px; height: 30px; border-radius: 50%; font-size: 16px; font-weight: 300; color: #444; transition: background ease-in .2s; outline: none; }
+.ui_calendar .ui_calendar_tbl tbody td button.disabled { color: #ccc; background: #f9f9f9; cursor: not-allowed; }
+.ui_calendar .ui_calendar_tbl tbody td button.disabled:active { background: #f9f9f9; }
+.ui_calendar .ui_calendar_tbl tbody td button:hover, .ui_calendar .ui_calendar_tbl tbody td button:focus { background: #f8f8f8; }
+.ui_calendar .ui_calendar_tbl tbody td button:active { transition: none; background: #e9e9e9; }
+.ui_calendar .ui_calendar_tbl .today { background: #ff3b31; color: #fff !important; }
+.ui_calendar .ui_calendar_tbl .today.disabled { background: #ff736c; }
+.ui_calendar .ui_calendar_tbl .today.disabled:hover, .ui_calendar .ui_calendar_tbl .today.disabled:focus { background: #ff736c; }
+.ui_calendar .ui_calendar_tbl .today:hover, .ui_calendar .ui_calendar_tbl .today:focus { background: #d8281e; }
+.ui_calendar .ui_calendar_tbl .today:active { background: #c01910; }

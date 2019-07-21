@@ -1,79 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script
-  src="https://code.jquery.com/jquery-1.12.4.min.js"
-  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-  crossorigin="anonymous"></script>
-  <title>Calendar</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script
+	src="https://code.jquery.com/jquery-1.12.4.min.js"
+	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+	crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/resources/ui/css/ej.plugins.css">
+	<title>Calendar</title>
 </head>
 <body>
-  <div class="ui_calendar"></div>
-  
-  <script type="text/jaascript">
-    $(document).ready(function(){
-      // 초기 세팅
-      createCalendar();
-      drawCalendar(2019, 6);
-      
-      function createCalendar() {
-        var $wrap = $('.ui_calendar'),
-            $inner = '';
-        
-        // inner content 생성
-        $inner += '<div class="ui_calendar_btns">';
-        $inner += '<button type="button" class="btn_prev_m">이전</button>';
-        $inner += '<button type="button" class="btn_next_m">다음</button>';
-        $inner += '</div>';
-        $inner += '<div class="ui_calendar_info">';
-        $inner += '<span class="ui_calendar_year"></span>';
-        $inner += '<span class="ui_calendar_month"></span>';
-        $inner += '</di>';
-        $inner += '<table class="ui_calendar_tbl">';
-        $inner += '<thead><tr></tr></thead><tbody></tbody>';
-        $inner += '</table>';
-        $wrap.prepend($inner);
-        
-        var theadDay = ['일', '월', '화', '수', '목', '금', '토'];
-        
-        for (var d = 0; d < theadDay.length; d++){
-          $wrap.find('thead tr').append('<th class="th_day' + d + '">' + theadDay[d] + '</th>');
-          
-          var $btnNext = $('.btn_next_m'),
-              $btnPrev = $('.btn_prev_m'),
-              $txtYY = $('.ui_calendar_year'),
-              $txtMM = $('.ui_calendar_month'),
-              
-              $tr = {},
-              $td = {};
-          
-          var today = new Date(),
-              date = new Date();
-          
-          // 초기 세팅
-          var yy = today.getFullYear(),
-              mm = today.getMonth(),
-              day = today.getDay();
-        }
-        
-        // 해당 월의 일 다 뽑아내기
-        function getDates(yy, mm){
-          var arrDate = [],
-              dd = 1;
-          
-          var date = new Date(),
-              $txtYY = $('.ui_calendar_year'),
-              $txtMM = $('.ui_calendar_month');
-          
-          date.getFullYear(yy);
-          date.setMonth(mm);
-        }
-      }
-            // to-be...
-    })
-  </script>
+	<div class="ui_calendar"></div>
+	<div class="ui_calendar"></div>
+
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		// 초기 세팅
+	createCalendar();
+	drawCalendar(2019, 6);
+		
+	function createCalendar() {
+		var $wrap = $('.ui_calendar'),
+			$inner = '';
+		
+		// inner content 생성
+		$inner += '<div class="ui_calendar_btns">';
+		$inner += '<button type="button" class="btn_prev_m">이전</button>';
+		$inner += '<button type="button" class="btn_next_m">다음</button>';
+		$inner += '</div>';
+		$inner += '<div class="ui_calendar_info">';
+		$inner += '<span class="ui_calendar_year"></span>';
+		$inner += '<span class="ui_calendar_month"></span>';
+		$inner += '</di>';
+		$inner += '<table class="ui_calendar_tbl">';
+		$inner += '<thead><tr></tr></thead><tbody></tbody>';
+		$inner += '</table>';
+		$wrap.prepend($inner);
+				
+		var theadDay = ['일', '월', '화', '수', '목', '금', '토'];
+		
+		for (var d = 0; d < theadDay.length; d++){
+			$wrap.find('thead tr').append('<th class="th_day' + d + '">' + theadDay[d] + '</th>');
+		}
+			
+		var $btnNext = $('.btn_next_m'),
+			$btnPrev = $('.btn_prev_m'),
+			$txtYY = $('.ui_calendar_year'),
+			$txtMM = $('.ui_calendar_month'),
+			
+			$tr = {},
+			$td = {};
+			
+		var today = new Date(),
+			date = new Date();
+		
+		// 초기 세팅
+		var yy = today.getFullYear(),
+			mm = today.getMonth(),
+			day = today.getDay();
+	}
+		
+	// 해당 월의 일 다 뽑아내기
+	function getDates(yy, mm){
+		var arrDate = [],
+			dd = 1;
+		
+		var date = new Date(),
+			$txtYY = $('.ui_calendar_year'),
+			$txtMM = $('.ui_calendar_month');
+		
+		date.getFullYear(yy);
+		date.setMonth(mm);
+
+		// 마지막 달이 아닐 때
+		if (mm != 11){
+			while (date.getMonth() <= mm+1){
+				date.setDate(dd);
+				// 마지막 일일 때 멈추기
+				if (date.getMonth() === mm+1){
+					break;
+				}
+				// 첫번째 일일 때
+				if (date.getDate() === 1){
+					// 첫번째 요일 이전 요일들에 빈값 넣기
+					for (var d = 0; d < date.getDay(); d++) {
+						arrDate.push('');
+					}
+				}
+				var tsYY = date.getFullYear(),
+					tsMM = date.getMonth(),
+					tsDD = date.getDate(),
+					tsDY = date.getDay();
+
+				arrDate.push({tsYY:tsYY, tsMM:tsMM, tsDD:tsDD, tsDY:tsDY});
+				dd++;
+			}
+		} else { // 마지막 달일 때
+			// 다음 년도로 넘어가기 전까지
+			while (date.getFullYear() <= yy){
+				date.setDate(dd);
+				// 마지막 일일 때 멈추기
+				if (date.getFullYear() === yy+1){
+					break;
+				}
+				// 첫번째 일일 때
+				if (date.getDate() === 1){
+				// 첫번째 요일 이전 요일들에 빈값 넣기
+					for(var d = 0; d < date.getDay(); d++){
+						arrDate.push('');
+					};
+				}
+				var tsYY = date.getFullYear(),
+					tsMM = date.getMonth(),
+					tsDD = date.getDate(),
+					tsDY = date.getDay();
+
+				arrDate.push({tsYY:tsYY, tsMM:tsMM, tsDD:tsDD, tsDY:tsDY});
+				dd++;
+			}
+		}
+		return arrDate;
+	}
+
+	function drawCalendar(yy, mm, $wrap) {
+		var arrDate = getDates(yy, mm);
+
+		var $wrap = $wrap === undefined ? $('.ui_calendar') : $wrap,
+			$tbl = $wrap.find('.ui_calendar_tbl'),
+			$txtYY = $wrap.find('.ui_calendar_year'),
+			$txtMM = $wrap.find('.ui_calendar_month');
+
+		// 년, 월 그리기
+		$txtYY.text(yy);
+		$txtMM.text(mm+1);
+
+		$tbl.find('tbody').html('');
+		var tbody = '',
+			td = '',
+			tr = '<tr>';
+
+		// 전체 일 수 만큼 td 그려주기
+		var day = 0;
+		while (arrDate.length > 0) {
+			var dayPop = arrDate.shift(),
+				txt = dayPop.tsDD;
+
+			// 빈 값이면
+			if (txt === undefined){
+				td += '<td></td>';
+			} else {
+				td += '<td class="day' + txt + '">';
+				td += '<button type="button" class="btn_day" aria-label="' + txt + '일 선택">';
+				td += txt + '</button>';
+				td += '</td>';
+			}
+			day++;
+			// 마지막 일이 토요일로 끝날 때
+			if (day % 7 === 0){
+				// 그냥 붙여줌
+				appendDays();
+				if (arrDate.length === 0) break;
+			}
+			// 마지막 일이 토요일 외 요일로 끝날 때
+			if (arrDate.length === 0 && dayPop.tsDY < 6){
+				// 빈 만큼 <td>로 채워줌
+				for (var n=0; n < 6-dayPop.tsDY; n++){
+					td += '<td></td>';
+				}
+				appendDays();
+				break;
+			}
+		}
+		function appendDays(){
+			tr += td + '</tr>';
+			tbody += tr;
+			td = '';
+			tr = '<tr>';
+			day = 0;
+		}
+		$tbl.find('tbody').append(tbody);
+
+		// 해당 캘린더 개수만큼
+		for (var i=0; i < $wrap.length; i++){
+			// 이번달 달력이면
+			setThisMonth(yy, mm, $wrap.eq(i));
+			// 공휴일 체크 (선택사항)
+			chkHoliday(yy, mm, $wrap.eq(i));
+			// 토, 일요일 disabled
+			for (var n=0; n<8; n++){
+				$tbl.eq(i).find('td').eq(7*n).find('.btn_day').addClass('disabled').prop('disabled', true).attr('disabled', 'disabled');
+				$tbl.eq(i).find('td').eq(7*n-1).find('.btn_day').addClass('disabled').prop('disabled', true).attr('disabled', 'disabled');
+			}
+		}
+	}
+
+	// 이번달 달력 세팅
+	function setThisMonth(yy, mm, $wrap) {
+		var today = new Date();
+
+		if (yy === today.getFullYear() && mm === today.getMonth()){
+			var dd = today.getDate(),
+				$tbl = $wrap.find('.ui_calendar_tbl');
+
+			// 이전 버튼 disabled
+			$wrap.find('.btn_prev_m').addClass('disabled').prop('disabled', true).attr('disabled', 'disabled');
+			// 오늘 날짜에 체크
+			$tbl.find('.day' + dd + ' .btn_day').addClass('today');
+
+			// 해당 캘린더 개수만큼
+			for (var i=0; i < $wrap.length; i++){
+				// 오늘 이전 일자 disabled
+				for (var j=0; j < dd; j++){
+				$tbl.eq(i).find('.btn_day').eq(j).addClass('disabled').prop('disabled', true).attr('disabled', 'disabled');
+				}
+			}
+		} else if (!!$wrap.find('.btn_prev_m').addClass('disabled')){
+			$wrap.find('.btn_prev_m').removeClass('disabled').prop('disabled', false).removeAttr('disabled');
+		}
+	}
+	// 공휴일 체크
+	function chkHoliday(yy, mm, $wrap){
+		var holiday = [
+			{tsYY: 2019, tsMM: 11, tsDD: 20},
+			{tsYY: 2019, tsMM: 11, tsDD: 10},
+			{tsYY: 2019, tsMM: 7, tsDD: 15},
+			{tsYY: 2019, tsMM: 6, tsDD: 25},
+			{tsYY: 2019, tsMM: 6, tsDD: 29},
+			{tsYY: 2019, tsMM: 5, tsDD: 15},
+			{tsYY: 2019, tsMM: 11, tsDD: 12},
+			{tsYY: 2019, tsMM: 10, tsDD: 4}
+		]
+		var i=0;
+		while (i<holiday.length){
+			// 공휴일 중 해당 월이 하나라도 있으면
+			if (yy === holiday[i].tsYY & mm === holiday[i].tsMM) {
+				var j=0,
+					tsHoliday = [];
+
+				while (j < holiday.length){
+					if (holiday[j].tsYY === yy && holiday[j].tsMM === mm){
+						tsHoliday.push(holiday[j]);
+					}
+					j++;
+				}
+
+				for (var n=0; n < tsHoliday.length; n++){
+					$wrap.find('.day' + tsHoliday[n].tsDD + ' .btn_day').addClass('disabled').prop('disabled', true).attr('disabled', 'disabled');
+				}
+				break;
+			}
+			i++;
+			// debugger;
+		}
+	}
+
+	$('.btn_next_m').on('click.nextMonth', function(){
+		var $wrap = $(this).closest('.ui_calendar'),
+			yy = parseInt($wrap.find('.ui_calendar_year').text()),
+			mm = parseInt($wrap.find('.ui_calendar_month').text());
+
+		if (mm === 12){
+			yy++;
+			mm = 1;
+		} else mm++;
+
+		drawCalendar(yy, mm-1, $wrap);
+	})
+	$('.btn_prev_m').on('click.prevMonth', function(){
+		var $wrap = $(this).closest('.ui_calendar'),
+			yy = parseInt($wrap.find('.ui_calendar_year').text()),
+			mm = parseInt($wrap.find('.ui_calendar_month').text());
+
+		if (mm === 1){
+			yy--;
+			mm = 12;
+		} else mm--;
+
+		drawCalendar(yy, mm-1, $wrap);
+	})
+})
+</script>
 </body>
 </html>
